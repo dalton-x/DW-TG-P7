@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
+const path = require('path');const cors = require('cors');
+
+var corsOptions = {
+  origin: "http://localhost:4200"
+};
 
 const app = express();
 
@@ -14,5 +18,12 @@ app.use((req, res, next) => {
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use(bodyParser.json());
+
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Bienvenue sur l'application communautaire de Groupomania" });
+});
+
+app.use(cors(corsOptions));
 
 module.exports = app;
