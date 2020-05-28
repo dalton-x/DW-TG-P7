@@ -4,15 +4,15 @@
       <a class="navbar-brand" routerLink=""> <img src="../assets/logo/logo.png" alt="Logo de l'entreprise Groupomania"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li routerLinkActive="active"><a routerLink="signup">Inscription</a>
+      <li routerLinkActive="active"><a *ngIf="!online" routerLink="signup">Inscription</a>
       </li>
-      <li routerLinkActive="active"><a routerLink="login">Connexion</a>
+      <li routerLinkActive="active"><a *ngIf="!online" routerLink="login">Connexion</a>
       </li>
-      <li routerLinkActive="active"><a class="cursor" (click)="onLogout()">Déconnexion</a>
+      <li routerLinkActive="active"><a class="cursor" *ngIf="online" (click)="onLogout()">Déconnexion</a>
       </li>
-      <li routerLinkActive="active"><a routerLink="profil">Mon profil</a>
+      <li routerLinkActive="active"><a *ngIf="online" routerLink="profil">Mon profil</a>
       </li>
-      <li routerLinkActive="active"><a routerLink="timeline">Les news</a>
+      <li routerLinkActive="active"><a *ngIf="online" routerLink="timeline">Les news</a>
       </li>
     </ul>
   </div>
