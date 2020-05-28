@@ -17,36 +17,43 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Haschage du mot de passe
-  bcrypt.hash(req.body.password, 10)
-  .then(hash => {
-  
-  // Création de l'objet user avec le retour du front-end
-  const user = {
-    email: req.body.email,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    password: hash,
-    pseudo: req.body.pseudo,
-    imageUrl: "http://localhost:3000/images/user.png",
-    online: 1,
-    isAdmin: 0,
-    dateInscription: new Date()
-  };
-  
-    // Création de l'utilisateur dans la BDD
-    User.create(user)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(501).send({
-        message:
-        err.message && "Une erreur s'est produite lors de la création de l'utilisateur."
+  User.findOne({ email: req.body.email }) // recherche de l'utilisateur en fonction de son email
+  .then(user => {
+    if (user) {    // Email déja en BDD
+      return res.status(401).json({ error: 'Utilisateur déja existant' });
+    }
+
+    // Haschage du mot de passe
+    bcrypt.hash(req.body.password, 10)
+    .then(hash => {
+    
+    // Création de l'objet user avec le retour du front-end
+    const user = {
+      email: req.body.email,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      password: hash,
+      pseudo: req.body.pseudo,
+      imageUrl: "http://localhost:3000/images/user.png",
+      online: 1,
+      isAdmin: 0,
+      dateInscription: new Date()
+    };
+    
+      // Création de l'utilisateur dans la BDD
+      User.create(user)
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(501).send({
+          message:
+          err.message && "Une erreur s'est produite lors de la création de l'utilisateur."
+        });
       });
-    });
-  })
-  .catch(error => res.status(502).json({ error }));
+    })
+    .catch(error => res.status(502).json({ error }));
+  });
 };
 
 // log un user et avec la verification de son mot de passe
