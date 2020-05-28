@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt')        // sert a cryter une chaine de caractere
 const jwt = require('jsonwebtoken');    // sert a generer un token d'authentification
 const db = require("../models");
+const fs = require('fs');
 const User = db.user;
 const Op = db.Sequelize.Op;
 
@@ -100,7 +101,32 @@ exports.update = (req, res, next) => {
   
 // Supprime un utilisateur en fontion de son email
 exports.delete = (req, res) => {
+  const id = req.params.id;
 
+  User.findOne({ id: id }) // recherche de l'utilisateur en fonction de son email
+  .then(user => {    
+    const filename = user.imageUrl.split('/images/')[1];
+      if (filename !== 'user.png'){
+        fs.unlink(`./images/${filename}`, (err) => {
+          if (err) throw err;
+        });
+      }
+    User.destroy({
+      where: { id: id }
+    })
+    .then(num => {   
+      res.status(200).send({
+        message: "Utilisateur supprimé avec l'ID :" + id
+      });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Impossible de supprimé cet utilisateur avec cet email : " + id
+      });
+    });
+  })
+  
+  
 };
   
 // Retourne tout les utilisateur en ligne
