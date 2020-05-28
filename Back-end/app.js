@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');const cors = require('cors');
 const db = require("./models/index");
-const sequelize = require('sequelize')
 
 var corsOptions = {
   origin: "http://localhost:4200"
@@ -21,6 +20,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use(bodyParser.json());
 
+
+require("./routes/user.routes")(app);
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Bienvenue sur l'application communautaire de Groupomania" });
@@ -28,6 +30,12 @@ app.get("/", (req, res) => {
 
 app.use(cors(corsOptions));
 
+// En production
 db.sequelize.sync();
+
+// En developpement DROP les tables apres chaque reboot
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.");
+// });
 
 module.exports = app;
