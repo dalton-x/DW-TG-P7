@@ -51,7 +51,29 @@ exports.create = (req, res) => {
 
 // log un user et avec la verification de son mot de passe
 exports.logIn = (req, res) => {
-    
+  User.findOne({ email: req.body.email }) // recherche de l'utilisateur en fonction de son email
+  .then(user => {
+  if (!user) {    // Utilisateur pas erregistré
+    return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+  }
+  bcrypt.compare(req.body.password, user.password)    // comparaison avec le mot de passe crypter en BDD
+    .then(valid => {
+      if (!valid) {
+          return res.status(401).json({ error: 'Mot de passe incorrect !' });
+      }
+      res.status(200).json({
+        userId: user._id,
+        token: jwt.sign(          //utilisisation de jsonWebToken
+          { userId: user._id },   //gestion du UserId
+          '$2b$10$hLNQnC3nMg7RQgnrDcdj9Oltl.UBmGruFCuNz2G.y33AjMgLJEJbq', // clé de cryptage
+          { expiresIn: '24h' }    // temps de validité
+        )
+      });
+      localStorage.setItem('token',token)
+    })
+    .catch(error => res.status(500).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
 };
 
 // Recuperation d'un user avec son email
