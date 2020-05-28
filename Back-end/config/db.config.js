@@ -5,7 +5,7 @@ module.exports = {
     DB: "groupomania",      // Nom de la base de donnée
     dialect: "mysql",       // type de base de donnée
     define: {
-      timestamps: false     // option pour la creation des table
+      timestamps: false     // option pour la creation des tables
     },
     pool: {
       max: 99999,           // nombre max de co simultanée

@@ -2,8 +2,7 @@ module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("user", {
       email: {
         type: Sequelize.STRING,
-        require: true,
-        primaryKey: true
+        require: true
       },
       firstname: {
         type: Sequelize.STRING,
@@ -21,14 +20,16 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         require: true
       },
-      avatar: {
+      imageUrl: {
         type: Sequelize.STRING
       },
       online: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: 0
       },
       isAdmin: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: 0
       },
       dateInscription: {
         type: Sequelize.DATE
