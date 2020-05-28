@@ -20,9 +20,9 @@ exports.create = (req, res) => {
 
   User.findOne({ email: req.body.email }) // recherche de l'utilisateur en fonction de son email
   .then(user => {
-    if (user) {    // Email déja en BDD
-      return res.status(401).json({ error: 'Utilisateur déja existant' });
-    }
+    // if (user) {    // Email déja en BDD
+    //   return res.status(401).json({ error: 'Utilisateur déja existant' });
+    // }
 
     // Haschage du mot de passe
     bcrypt.hash(req.body.password, 10)
@@ -77,7 +77,7 @@ exports.logIn = (req, res) => {
           { expiresIn: '24h' }    // temps de validité
         )
       });
-      localStorage.setItem('token',token)
+      sessionStorage.setItem('token',token)
     })
     .catch(error => res.status(500).json({ error }));
   })
