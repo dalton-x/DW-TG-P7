@@ -1,0 +1,37 @@
+/* font */
+@font-face {
+	font-family: 'nevis';
+	src: url(../app/fonts/nevis.ttf);
+}
+
+/* Header */
+.navbar{
+  background-color: #413E36;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+  font-size: 1.6em;
+  color: #ffffff;
+  &:hover{
+    text-decoration: none;
+    font-size: 1.6em;
+    color: #797979;
+  }
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+/* body */
+body{
+  cursor: default;
+}
+
+/* Footer */
+footer.fixed{
+  position: fixed;
+  bottom: 0;left: 0;right: 0;
+}
