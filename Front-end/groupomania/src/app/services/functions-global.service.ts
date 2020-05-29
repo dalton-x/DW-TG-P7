@@ -5,7 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class FunctionsGlobalService {
 
+  public userOnline : boolean
+
   constructor() { }
 
+getToken(){
+  sessionStorage.getItem('log')
+}
 
+getOnline(){
+  if (this.getToken() !== null){
+    this.userOnline = true
+  }else{
+    this.userOnline = false
+  }
+}
 }

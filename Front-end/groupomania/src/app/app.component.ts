@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FunctionsGlobalService } from './services/functions-global.service';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public online: boolean
+  public isOnline: boolean
 
-  constructor() { }
+  constructor(private functionsGlobal : FunctionsGlobalService
+  ) { }
 
   ngOnInit() {
-    const token = sessionStorage.getItem('token')
-    if (token !== null){
-      console.log("NON NULL")
-      this.online = true
-    }else{
-      console.log("NULL")
-      this.online = false
-    }
-
   }
 
   onLogout() {

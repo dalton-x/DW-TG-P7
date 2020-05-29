@@ -8,23 +8,12 @@ import { User } from '../models/User.model';
 })
 export class AuthService {
 
-
-  private authToken: string;
   private email: string;
   private id: string;
   private user: User;
 
   constructor(private http: HttpClient,
               private router: Router) {}
-
-
-  getToken() {
-    return this.authToken;
-  }
-
-  getUserEmail() {
-    return this.email;
-  }
 
   getUserId() {
     return this.id;
@@ -52,5 +41,22 @@ export class AuthService {
         }
       );
     });
+  }
+
+  login(email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      this.http.post('http://localhost:3000/api/user/login', {email: email, password: password}).subscribe(
+        (response: {userId: string, token: string}) => {
+          resolve();
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  logout() {
+    this.router.navigate(['/index']);
   }
 }

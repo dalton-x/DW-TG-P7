@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +13,6 @@ import { IndexComponent } from './index/index.component';
 import { LegalComponent } from './legal/legal.component';
 import { ProfilComponent } from './profil/profil.component';
 import { TimelineComponent } from './timeline/timeline.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

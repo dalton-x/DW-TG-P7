@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
+import { FunctionsGlobalService } from '../services/functions-global.service';
 
 @Component({
   selector: 'app-index',
@@ -9,7 +11,7 @@ export class IndexComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

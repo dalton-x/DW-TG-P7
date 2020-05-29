@@ -33,10 +33,9 @@ export class SignupComponent implements OnInit {
     const pseudo = this.signupForm.get('pseudo').value;
     const email = this.signupForm.get('email').value;
     const password = this.signupForm.get('password').value;
-    console.log(lastname+" : "+firstname+" : "+pseudo+" : "+email+" : "+password)
     this.auth.create(lastname, firstname, pseudo, email, password).then(
       (response: { message: string }) => {
-        this.router.navigate(['/index']);
+        this.router.navigate(['/timeline']);
       }
     ).catch((error) => {
         console.error(error);
