@@ -36,7 +36,6 @@ exports.create = (req, res) => {
       password: hash,
       pseudo: req.body.pseudo,
       imageUrl: "http://localhost:3000/images/user.png",
-      online: 1,
       isAdmin: 0,
       dateInscription: new Date()
     };

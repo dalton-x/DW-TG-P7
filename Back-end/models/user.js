@@ -23,10 +23,6 @@ module.exports = (sequelize, Sequelize) => {
       imageUrl: {
         type: Sequelize.STRING
       },
-      online: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: 0
-      },
       isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: 0
