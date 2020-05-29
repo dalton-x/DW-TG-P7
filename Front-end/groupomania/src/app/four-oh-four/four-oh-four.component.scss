@@ -1,0 +1,17 @@
+img{
+  width: auto;
+  height: auto;
+  margin-top: 10%;
+}
+
+a{
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.6em;
+  color: #000000;
+  &:hover{
+    text-decoration: none;
+    font-size: 1.6em;
+    color: #000000;
+  }
+}
