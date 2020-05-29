@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ export class SignupComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private auth: AuthService,
+              private app: AppComponent,
               private router: Router) { }
 
   ngOnInit() {
@@ -35,6 +37,8 @@ export class SignupComponent implements OnInit {
     const password = this.signupForm.get('password').value;
     this.auth.create(lastname, firstname, pseudo, email, password).then(
       (response: { message: string }) => {
+        localStorage.setItem('auth',JSON.stringify(true))
+        this.app.isOnline = true
         this.router.navigate(['/timeline']);
       }
     ).catch((error) => {

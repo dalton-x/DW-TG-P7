@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  User.findOne({ email: req.body.email }) // recherche de l'utilisateur en fonction de son email
+  User.findOne({ where: {email: req.body.email} }) // recherche de l'utilisateur en fonction de son email
   .then(user => {
     // if (user) {    // Email déja en BDD
     //   return res.status(401).json({ error: 'Utilisateur déja existant' });
@@ -58,7 +58,7 @@ exports.create = (req, res) => {
 
 // log un user et avec la verification de son mot de passe
 exports.logIn = (req, res) => {
-  User.findOne({ email: req.body.email }) // recherche de l'utilisateur en fonction de son email
+  User.findOne({ where: {email: req.body.email} }) // recherche de l'utilisateur en fonction de son email
   .then(user => {
   if (!user) {    // Utilisateur pas erregistré
     return res.status(401).json({ error: 'Utilisateur non trouvé !' });
@@ -68,15 +68,19 @@ exports.logIn = (req, res) => {
       if (!valid) {
           return res.status(401).json({ error: 'Mot de passe incorrect !' });
       }
-      res.status(200).json({
-        userId: user._id,
+      res.status(200).json({        
+        userId: user.id,
+        email: user.email,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        pseudo: user.pseudo,
+        imageUrl: user.imageUrl,
         token: jwt.sign(          //utilisisation de jsonWebToken
-          { userId: user._id },   //gestion du UserId
+          { userId: user.id },   //gestion du UserId
           '$2b$10$hLNQnC3nMg7RQgnrDcdj9Oltl.UBmGruFCuNz2G.y33AjMgLJEJbq', // clé de cryptage
           { expiresIn: '24h' }    // temps de validité
         )
       });
-      sessionStorage.setItem('token',token)
     })
     .catch(error => res.status(500).json({ error }));
   })
@@ -85,7 +89,17 @@ exports.logIn = (req, res) => {
 
 // Recuperation d'un user avec son email
 exports.getOne = (req, res, next) => {
-
+  User.findOne({ where: {id: req.params.id} }).then(
+    (user) => {
+      res.status(200).json(user);
+    }
+  ).catch(
+    (error) => {
+      res.status(404).json({
+        error: error
+      });
+    }
+  );
 };
 
 // Retourne tout les utilisateurs de la base de données

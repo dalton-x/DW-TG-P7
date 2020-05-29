@@ -9,12 +9,12 @@ export class FunctionsGlobalService {
 
   constructor() { }
 
-getToken(){
-  sessionStorage.getItem('log')
+getLogin(){
+  localStorage.getItem('log')
 }
 
 getOnline(){
-  if (this.getToken() !== null){
+  if (this.getLogin() !== null){
     this.userOnline = true
   }else{
     this.userOnline = false

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/User.model';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private auth: AuthService,
+              private app: AppComponent,
               private router: Router) { }
 
   ngOnInit() {
@@ -32,6 +34,8 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.get('password').value;
     this.auth.login(email, password).then(
       () => {
+        localStorage.setItem('auth',JSON.stringify(true))
+        this.app.isOnline = true
         this.router.navigate(['/timeline']);
       }
     ).catch(
