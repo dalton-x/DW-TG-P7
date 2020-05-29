@@ -1,0 +1,25 @@
+img{
+  margin-left: 20%;
+  max-height: 100px;
+  max-width: 100px;
+  display:block;
+  margin-top:10px;
+}
+
+input.image{
+  margin-left: 10%;
+}
+
+button.image{
+  // margin-left: 20%;
+  align-items: center;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#inner{
+  margin-left: 30%;
+  margin-right: 30%;
+}

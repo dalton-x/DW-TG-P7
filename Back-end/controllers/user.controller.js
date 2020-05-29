@@ -109,7 +109,45 @@ exports.getAll = (req, res) => {
 
 // Met a jour les données de l'utilisateur
 exports.update = (req, res, next) => {
-    
+  let updatedUser
+  const id = req.params.id;
+  
+  if (req.file) {
+    User.findOne({where: {id: req.params.id}})
+  .then(user => {
+      // Récupération du nom de l'image
+      const filename = user.imageUrl.split('/images/')[1];
+      if (filename !== 'user.png'){
+      // Suppression de l'ancienne image      
+        fs.unlink(`images/${filename}`, function (error) {
+          if (error) throw error;
+        });
+      }    
+    const parseBody = JSON.parse(req.body.user)
+    // on construit l'objet qui sera mis à jour avec la nouvelle image
+    updatedUser = {
+      firstname: parseBody.firstname,
+      lastname: parseBody.lastname,
+      pseudo: parseBody.pseudo,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    }
+    User.update(updatedUser, {where: { id: id }})
+    .then(() => res.status(203).json({ message: 'Utilisateur Mis a jour' }))
+    .catch(error => res.status(401).json({ error }));
+  })
+  .catch(error => res.status(502).json({ error }));
+  
+  } else {
+    //on construit l'objet qui sera mis à jour avec la même image
+    updatedUser = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      pseudo: req.body.pseudo,
+    }
+    User.update(updatedUser, {where: { id: id }})
+    .then(() => res.status(203).json({ message: 'Utilisateur Mis a jour' }))
+    .catch(error => res.status(401).json({ error }));
+  }  
 };
   
 // Supprime un utilisateur en fontion de son email

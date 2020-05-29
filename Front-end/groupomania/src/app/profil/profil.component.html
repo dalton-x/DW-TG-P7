@@ -1,1 +1,33 @@
-<p>profil works!</p>
+<div class="container-fluid">
+	<div class="row"id="inner">
+    <div class="col-md-12 container-fluid">
+        <form [formGroup]="profilForm" >
+        <p class="h3">Informations Publique :</p>
+        <div class="form-group">
+          <label class="h6" for="pseudo">Pseudo</label>
+          <input type="text" class="form-control" id="pseudo" formControlName="pseudo">
+        </div>
+
+        <img alt="Photo de profil" [src]="imagePreview" *ngIf="imagePreview" class="rounded img-fluid mx-auto d-block">
+        <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
+        <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imageInput.click()">CHANGER</button>
+        <input class="image" type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
+        <br>
+        <p class="h3">Informations Personnel :</p>
+
+        <div class="form-group">
+          <label class="h6"  for="firstname">Prénom</label>
+          <input type="text" class="form-control" id="firstname"  formControlName="firstname" >
+        </div>
+
+        <div class="form-group">
+          <label class="h6"  for="lastname">Nom</label>
+          <input type="text" class="form-control" id="lastname" formControlName="lastname">
+        </div>
+
+        <button class="btn btn-success mx-auto d-block" [disabled]="profilForm.invalid" (click)="onUpdate()">METTRE A JOUR</button>
+        <button class="btn btn-danger mx-auto d-block" (click)="onDelete()">SUPPRIMER</button>
+      </form>
+    </div>
+	</div>
+</div>
