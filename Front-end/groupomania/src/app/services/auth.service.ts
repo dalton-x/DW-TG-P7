@@ -107,7 +107,6 @@ export class AuthService {
   }
 
   update(id: string ,userData : Object, image: string | File) {
-    console.log("IMAGE",image)
     return new Promise((resolve, reject) => {
       if (typeof image === 'string') {
         this.http.put('http://localhost:3000/api/user/' + id, userData).subscribe(
@@ -131,6 +130,20 @@ export class AuthService {
           }
         );
       }
+    });
+  }
+
+  delete(id: string){
+    return new Promise((resolve, reject) => {
+      this.http.delete<User>('http://localhost:3000/api/user/'+ id )
+      .subscribe(
+        () => {
+          console.log("l'utilisateur à été supprimé")
+        },
+        (error) => {
+          reject(error);
+        }
+      );
     });
   }
 }
