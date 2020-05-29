@@ -1,9 +1,14 @@
 img{
   margin-left: 20%;
-  max-height: 100px;
-  max-width: 100px;
+  max-height: 200px;
+  max-width: 200px;
   display:block;
   margin-top:10px;
+  border-radius: 30%;
+  -webkit-border-radius: 30%;
+  -moz-border-radius: 30%;
+  -ms-border-radius: 30%;
+  -o-border-radius: 30%;
 }
 
 input.image{

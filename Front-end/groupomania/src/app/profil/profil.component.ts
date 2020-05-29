@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../models/User.model';
 import { AuthService } from '../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FunctionsGlobalService } from '../services/functions-global.service';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-profil',
@@ -22,7 +22,8 @@ export class ProfilComponent implements OnInit {
 
   constructor(private auth: AuthService,
               private formBuilder : FormBuilder,
-              private router: Router
+              private router: Router,
+              private app: AppComponent
               ) {}
 
   ngOnInit(): void {
@@ -59,7 +60,7 @@ export class ProfilComponent implements OnInit {
     .then(
       (response: { message: string }) => {
         console.log(response.message);
-        this.router.navigate(['/profil']);
+        this.router.navigate(['/updateUser']);
       }
     ).catch(
       (error) => {

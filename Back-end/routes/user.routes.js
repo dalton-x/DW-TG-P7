@@ -13,7 +13,7 @@ module.exports = app => {
   router.get("/:id", multer, userCtrl.getOne);
   router.get("/online",auth, userCtrl.getAllOnline);
   router.put("/:id", multer, userCtrl.update);
-  router.delete("/:id",auth, multer, userCtrl.delete);
+  router.delete("/:id", multer, userCtrl.delete);
 
   app.use('/api/user', router);
 

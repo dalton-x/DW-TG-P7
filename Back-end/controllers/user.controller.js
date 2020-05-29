@@ -154,14 +154,16 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  User.findOne({ id: id }) // recherche de l'utilisateur en fonction de son email
-  .then(user => {    
-    const filename = user.imageUrl.split('/images/')[1];
+  User.findOne({where: {id: id}})
+  .then(user => {
+      // Récupération du nom de l'image
+      const filename = user.imageUrl.split('/images/')[1];
       if (filename !== 'user.png'){
-        fs.unlink(`./images/${filename}`, (err) => {
-          if (err) throw err;
+      // Suppression de l'ancienne image      
+        fs.unlink(`images/${filename}`, function (error) {
+          if (error) throw error;
         });
-      }
+      }    
     User.destroy({
       where: { id: id }
     })

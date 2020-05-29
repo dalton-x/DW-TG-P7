@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
       (response: { message: string }) => {
         localStorage.setItem('auth',JSON.stringify(true))
         this.app.isOnline = true
-        this.router.navigate(['/timeline']);
+        this.router.navigate(['/login']);
       }
     ).catch((error) => {
         console.error(error);
