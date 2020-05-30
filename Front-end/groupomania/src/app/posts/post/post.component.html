@@ -4,38 +4,44 @@
 			<h3 class="text-center">
 				Poster votre message
 			</h3>
-			<div class="row">
         <form [formGroup]="postForm">
-          <div class="form-group">
-            <div class="col-md-6" >
-              <label id="title" class="badge badge-default">Label</label>
+          <div class="form-row form-group">
+            <div class="col-md-6 offset-md-3 form-group form-control-md" >
+              <label for="title" class="badge badge-default mt-3">Titre du post</label>
               <input type="text" class="form-control" id="title" formControlName="title">
+              <br>
+
+              <p class="text-center">Votre illustration</p>
               <img alt="Photo de profil" [src]="imageUpload" *ngIf="imageUpload" class="rounded img-fluid mx-auto d-block">
               <input type="file" accept="image/*" #imageInput (change)="onFileUpload($event)">
               <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imageInput.click()">Poster une image</button>
               <input class="image" type="file" accept="image/*" #imageInput (change)="onFileUpload($event)">
-              <label id="" class="badge badge-default">Label</label>
-              <input type="text" class="form-control" id="email" formControlName="email">
-            </div>
-            <div class="col-md-6">
-              <label id="" class="badge badge-default">Label</label>
-              <input type="text" class="form-control" id="email" formControlName="email">
-              <label id="" class="badge badge-default">Label</label>
-              <input type="text" class="form-control" id="email" formControlName="email">
-            </div>
-          </div>
-        </form>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
+              <br>
 
+              <label for="humeur" class="badge badge-default mt-3">Votre humeur</label>
+              <br>
+              <SELECT id="humeur" name="nom" size="1">
+                <OPTION>😴 Fatigué
+                <OPTION>😥 triste
+                <OPTION>🤒 Malade
+                <OPTION>😱 Terrorisé
+                <OPTION>😡 En colère
+                </SELECT>
+              <br>
+
+              <label for="keyWords" class="badge badge-default mt-3">Mots-clés</label>
+              <input type="text" class="form-control" id="keyWords" formControlName="email">
+              <label for="message" class="badge badge-default mt-3">Votre message</label>
+              <textarea class="form-control" id="message" rows="3"></textarea>
+            </div>
+			    </div>
+        </form>
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
 					<button type="button" class="btn btn-success">
 						POSTER
-					</button>
-				</div>
-				<div class="col-md-6">
-
-					<button type="button" class="btn btn-danger">
+          </button>
+          <button type="button" class="btn btn-danger float-right">
 						ANNULER
 					</button>
 				</div>
