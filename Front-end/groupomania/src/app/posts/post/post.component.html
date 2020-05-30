@@ -1,0 +1,45 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">
+				Poster votre message
+			</h3>
+			<div class="row">
+        <form [formGroup]="postForm">
+          <div class="form-group">
+            <div class="col-md-6" >
+              <label id="title" class="badge badge-default">Label</label>
+              <input type="text" class="form-control" id="title" formControlName="title">
+              <img alt="Photo de profil" [src]="imageUpload" *ngIf="imageUpload" class="rounded img-fluid mx-auto d-block">
+              <input type="file" accept="image/*" #imageInput (change)="onFileUpload($event)">
+              <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imageInput.click()">Poster une image</button>
+              <input class="image" type="file" accept="image/*" #imageInput (change)="onFileUpload($event)">
+              <label id="" class="badge badge-default">Label</label>
+              <input type="text" class="form-control" id="email" formControlName="email">
+            </div>
+            <div class="col-md-6">
+              <label id="" class="badge badge-default">Label</label>
+              <input type="text" class="form-control" id="email" formControlName="email">
+              <label id="" class="badge badge-default">Label</label>
+              <input type="text" class="form-control" id="email" formControlName="email">
+            </div>
+          </div>
+        </form>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+
+					<button type="button" class="btn btn-success">
+						POSTER
+					</button>
+				</div>
+				<div class="col-md-6">
+
+					<button type="button" class="btn btn-danger">
+						ANNULER
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
