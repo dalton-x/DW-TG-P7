@@ -12,7 +12,7 @@ import { AppComponent } from '../app.component';
 })
 export class ProfilComponent implements OnInit {
 
-  profilForm: FormGroup
+  public profilForm: FormGroup
   user: User;
   imagePreview: string;
   uploadFile: File = null;
@@ -22,8 +22,7 @@ export class ProfilComponent implements OnInit {
 
   constructor(private auth: AuthService,
               private formBuilder : FormBuilder,
-              private router: Router,
-              private app: AppComponent
+              private router: Router
               ) {}
 
   ngOnInit(): void {
