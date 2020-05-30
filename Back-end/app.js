@@ -21,6 +21,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(bodyParser.json());
 
 
+// Route pour les users
+require("./routes/user.routes")(app);
+// Route pour les posts
 require("./routes/user.routes")(app);
 
 // simple route
