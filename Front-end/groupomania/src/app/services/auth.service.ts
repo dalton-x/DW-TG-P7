@@ -10,6 +10,7 @@ import { User } from '../models/User.model';
 export class AuthService {
 
   private email: string;
+  isOnline = false
   onToken = new BehaviorSubject<boolean>(false);
   public userId: string;
   public firstname: string;
@@ -37,7 +38,6 @@ export class AuthService {
   getUserImageUrl() {
     return this.imageUrl;
   }
-
   getToken() {
     return this.authToken;
   }
@@ -91,6 +91,7 @@ export class AuthService {
             this.authToken = response.token;
             this.onToken.next(true);
             resolve(
+              this.isOnline = true
               );
         },
         (error) => {
@@ -103,6 +104,7 @@ export class AuthService {
   logout() {
     this.authToken = null;
     this.onToken.next(false);
+    this.isOnline = false;
     this.router.navigate(['/index']);
   }
 
@@ -138,6 +140,7 @@ export class AuthService {
       this.http.delete<User>('http://localhost:3000/api/user/'+ id )
       .subscribe(
         () => {
+          this.onToken.next(false);
           console.log("l'utilisateur à été supprimé")
         },
         (error) => {

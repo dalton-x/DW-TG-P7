@@ -14,10 +14,10 @@ import { DeleteUserComponent } from './profil/delete-user/delete-user.component'
 import { IndexComponent } from './index/index.component';
 import { LegalComponent } from './legal/legal.component';
 import { ProfilComponent } from './profil/profil.component';
-import { TimelineComponent } from './timeline/timeline.component';
-import { AuthGuard } from './services/auth-guard.service';
+import { TimelineComponent } from './posts/timeline/timeline.component';
 import { AuthService } from './services/auth.service';
 import { UpdateUserComponent } from './profil/update-user/update-user.component';
+import { PostComponent } from './posts/post/post.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { UpdateUserComponent } from './profil/update-user/update-user.component'
     LegalComponent,
     ProfilComponent,
     TimelineComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,6 @@ import { UpdateUserComponent } from './profil/update-user/update-user.component'
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    AuthGuard,
     AuthService
   ],
   bootstrap: [AppComponent]
