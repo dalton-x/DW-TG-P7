@@ -28,11 +28,9 @@ export class AppComponent {
       }
     );
     let getSession = localStorage.getItem('auth')
-    // alert("getsession : "+getSession)
     if (JSON.parse(getSession)) {
       this.authSubscription = this.auth.onToken.subscribe(
         (auth) => {
-          alert ("auth : "+auth)
           if (getSession == JSON.parse(getSession) || getSession == null){
             this.isOnline = false
             localStorage.setItem('auth',JSON.stringify(auth))
