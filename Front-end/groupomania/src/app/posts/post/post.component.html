@@ -20,28 +20,29 @@
 
               <label for="humeur" class="badge badge-default mt-3">Votre humeur</label>
               <br>
-              <SELECT id="humeur" name="nom" size="1">
-                <OPTION>😴 Fatigué
-                <OPTION>😥 triste
-                <OPTION>🤒 Malade
-                <OPTION>😱 Terrorisé
-                <OPTION>😡 En colère
-                </SELECT>
+              <select id="humeur" name="nom" size="1"  formControlName="humeur">
+                <option value="0" selected>Votre humeur</option>
+                <option value="Fatigue">😴 Fatigué</option>
+                <option value="Triste">😥 Triste</option>
+                <option value="Malade">🤒 Malade</option>
+                <option value="Terrorise">😱 Terrorisé</option>
+                <option value="colere">😡 En colère</option>
+              </select>
               <br>
 
-              <label for="keyWords" class="badge badge-default mt-3">Mots-clés</label>
-              <input type="text" class="form-control" id="keyWords" formControlName="email">
+              <label for="keywords" class="badge badge-default mt-3">Mots-clés</label>
+              <input type="text" class="form-control" id="keywords" formControlName="keywords">
               <label for="message" class="badge badge-default mt-3">Votre message</label>
-              <textarea class="form-control" id="message" rows="3"></textarea>
+              <textarea class="form-control" id="message" rows="3"  formControlName="message"></textarea>
             </div>
 			    </div>
         </form>
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
-					<button type="button" class="btn btn-success">
+					<button type="button" class="btn btn-success" (click)="onValidatePost()">
 						POSTER
           </button>
-          <button type="button" class="btn btn-danger float-right">
+          <button type="button" class="btn btn-danger float-right" (click)="onCancelPost()">
 						ANNULER
 					</button>
 				</div>

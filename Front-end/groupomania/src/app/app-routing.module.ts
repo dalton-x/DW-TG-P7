@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // authentification
+import { AuthGuard } from './services/auth-guard.service';
 
 // routes
 import { SignupComponent } from './auth/signup/signup.component';
@@ -13,7 +14,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { UpdateUserComponent } from './profil/update-user/update-user.component';
 import { DeleteUserComponent } from './profil/delete-user/delete-user.component';
 import { LegalComponent } from './legal/legal.component';
-import { AuthGuard } from './services/auth-guard.service';
+import { PostComponent } from './posts/post/post.component';
 
 
 const routes: Routes = [
@@ -21,10 +22,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'index', component: IndexComponent},
   { path: 'legal', component: LegalComponent },
-  { path: 'timeline', component: TimelineComponent, canActivate: [AuthGuard]},
-  { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard]},
-  { path: 'updateUser', component: UpdateUserComponent, canActivate: [AuthGuard]},
-  { path: 'deleteUser', component: DeleteUserComponent, canActivate: [AuthGuard]},
+  { path: 'timeline', component: TimelineComponent}, //, canActivate: [AuthGuard]
+  { path: 'profil', component: ProfilComponent}, //, canActivate: [AuthGuard]
+  { path: 'updateUser', component: UpdateUserComponent}, //, canActivate: [AuthGuard]
+  { path: 'deleteUser', component: DeleteUserComponent}, //, canActivate: [AuthGuard]
+  { path: 'timeline/post', component: PostComponent}, //, canActivate: [AuthGuard]
   { path: '', component: IndexComponent},
   { path: 'not-found', component: FourOhFourComponent},
   { path: '**', redirectTo: '/not-found'} //mettre a la fin des routes
