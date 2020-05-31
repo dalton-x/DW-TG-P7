@@ -4,6 +4,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         require: true
       },
+      userPseudoPost: {
+        type: Sequelize.STRING,
+        require: true
+      },
       title: {
         type: Sequelize.STRING,
         require: true
