@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');    // sert a generer un token d'authentific
 const db = require("../models");
 const fs = require('fs');
 const User = db.user;
-const Op = db.Sequelize.Op;
 
 
 

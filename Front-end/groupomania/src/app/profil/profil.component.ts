@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../models/User.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-profil',
@@ -12,13 +11,13 @@ import { AppComponent } from '../app.component';
 })
 export class ProfilComponent implements OnInit {
 
-  public profilForm: FormGroup
+  public profilForm: FormGroup;
   user: User;
   imagePreview: string;
   uploadFile: File = null;
-  fileName: string
-  fileLastModified: number
-  filetype: string
+  fileName: string;
+  fileLastModified: number;
+  filetype: string;
 
   constructor(private auth: AuthService,
               private formBuilder : FormBuilder,
