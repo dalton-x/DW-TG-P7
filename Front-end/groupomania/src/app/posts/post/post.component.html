@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" *ngIf="postForm">
 		<div class="col-md-12">
 			<h3 class="text-center">
 				Poster votre message
@@ -10,28 +10,30 @@
               <label for="title" class="badge badge-default mt-3">Titre du post</label>
               <input type="text" class="form-control" id="title" formControlName="title">
               <br>
-
-              <p class="text-center">Votre illustration</p>
-              <img alt="Photo de profil" [src]="imageUpload" *ngIf="imageUpload" class="rounded img-fluid mx-auto d-block">
-              <input type="file" accept="image/*" #imageInput (change)="onFileUpload($event)">
-              <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imageInput.click()">Poster une image</button>
-              <input class="image" type="file" accept="image/*" #imageInput (change)="onFileUpload($event)">
+              <p class="text-center" *ngIf="!imageUpload">Votre illustration</p>
+              <img alt="Image du post" [src]="imageUpload" *ngIf="imageUpload" class="rounded img-fluid mx-auto d-block form-control">
+              <input type="file" accept="image/*" #imagePostInput (change)="onFileUpload($event)">
+              <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imagePostInput.click()" *ngIf="!imageUpload">Poster une image</button>
+              <button class="btn-default image btn btn-success mx-auto d-block primary" (click)="imagePostInput.click()" *ngIf="imageUpload">Changer l'image</button>
+              <input class="image" type="file" accept="image/*" #imagePostInput (change)="onFileUpload($event)">
               <br>
-
-              <label for="humeur" class="badge badge-default mt-3">Votre humeur</label>
-              <br>
-              <select id="humeur" name="nom" size="1"  formControlName="humeur">
-                <option value="0" selected>Votre humeur</option>
-                <option value="Fatigue">😴 Fatigué</option>
-                <option value="Triste">😥 Triste</option>
-                <option value="Malade">🤒 Malade</option>
-                <option value="Terrorise">😱 Terrorisé</option>
-                <option value="colere">😡 En colère</option>
-              </select>
-              <br>
-
-              <label for="keywords" class="badge badge-default mt-3">Mots-clés</label>
-              <input type="text" class="form-control" id="keywords" formControlName="keywords">
+              <div class="form-row">
+                <div class="col">
+                  <label for="keywords" class="badge badge-default mt-3">Mots-clés</label>
+                  <input type="text" class="form-control" id="keywords" formControlName="keywords">
+                </div>
+                <div class="col">
+                  <label for="humeur" class="badge badge-default mt-3">Votre humeur</label>
+                  <select id="humeur" class="form-control" name="humeur" size="1"  formControlName="humeur">
+                    <option                > Aucune humeur particulière</option>
+                    <option value="Fatigue">😴 Fatigué</option>
+                    <option value="Triste">😥 Triste</option>
+                    <option value="Malade">🤒 Malade</option>
+                    <option value="Terrorise">😱 Terrorisé</option>
+                    <option value="colere">😡 En colère</option>
+                  </select>
+                </div>
+              </div>
               <label for="message" class="badge badge-default mt-3">Votre message</label>
               <textarea class="form-control" id="message" rows="3"  formControlName="message"></textarea>
             </div>
@@ -39,7 +41,7 @@
         </form>
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
-					<button type="button" class="btn btn-success" (click)="onValidatePost()">
+					<button type="button" class="btn btn-success" [disabled]="postForm.invalid" (click)="onValidatePost()">
 						POSTER
           </button>
           <button type="button" class="btn btn-danger float-right" (click)="onCancelPost()">

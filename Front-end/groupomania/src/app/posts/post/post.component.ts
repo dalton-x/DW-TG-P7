@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/User.model';
+import { FormGroup, FormBuilder, Validators, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/User.model';
 import { Router } from '@angular/router';
-import { compilePipeFromMetadata } from '@angular/compiler';
-import { Post } from 'src/app/models/Post.model';
+import { Post } from '../../models/Post.model';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -13,13 +13,19 @@ import { Post } from 'src/app/models/Post.model';
 })
 export class PostComponent implements OnInit {
 
-  public postForm: FormGroup;
-  imageUpload: string;
+  postForm: FormGroup;
   user: User;
   post: Post;
+  title: string;
+  humeur: string;
+  keywords: string;
+  message: string;
+  imagePostUrl: File = null;
+  imageUpload: string;
 
   constructor(
     private auth: AuthService,
+    private postService: PostService,
     private formBuilder: FormBuilder,
     private router: Router
   ) { }
@@ -38,14 +44,37 @@ export class PostComponent implements OnInit {
 
   initPostForm(user:User){
     this.postForm = this.formBuilder.group({
-      id: [this.user.id],
+      idUser: [this.user.id],
       title: ['Votre titre', Validators.required],
       humeur: ['', Validators.required],
       keywords: ['Un mot clé'],
       message: ['Votre message', Validators.required],
       imagePostUrl: ['']
     });
-    this.imageUpload = '';
+  }
+
+  onValidatePost(){
+    alert('Etes vous sur de vouloir poster votre message')
+
+    const newPost = new Post();
+    newPost.title = this.postForm.get('title').value;
+    newPost.userPseudo = this.user.pseudo;
+    newPost.humeur = this.postForm.get('humeur').value;
+    newPost.keywords = this.postForm.get('keywords').value;
+    newPost.message = this.postForm.get('message').value;
+    newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;
+
+    this.postService.newPost(this.auth.getUserId(), newPost, newPost.imagePostUrl)
+    .then(
+      (response: { message: string }) => {
+        this.router.navigate(['/timeline']);
+      }
+    ).catch(
+      (error) => {
+        console.error(error);
+      }
+    );
+    this.router.navigate(['/timeline'])
   }
 
 
@@ -60,14 +89,8 @@ export class PostComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onValidatePost(){
-    alert('etes vous sur de vouloir poster votre message')
-    console.log("this.postForm",this.postForm)
-    this.router.navigate(['/timeline'])
-  }
-
   onCancelPost(){
-    alert('etes vous sur d\'annuler votre message')
+    alert('Etes vous sur d\'annuler votre message')
     this.router.navigate(['/timeline'])
   }
 
