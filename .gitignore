@@ -5,5 +5,8 @@
 /Front-end/node_modules
 /Front-end/src/app/profil/images
 
+/node_modules
+/.vscode
+
 /logos
 /Maquette
