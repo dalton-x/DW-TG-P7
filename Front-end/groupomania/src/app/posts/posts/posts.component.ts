@@ -14,28 +14,9 @@ export class PostsComponent implements OnInit {
   postsSub: Subscription;
   posts: Post[];
 
-  //template
-  public mood: string;
-  public title: string;
-  public imagePostUrl: string;
-  public keywords: string;
-  public message: string;
-  public postDate: Date;
-  public userPseudoPost: string;
-
-  // envoie des informations au template
-  public template_posts_title:string
-  public template_posts_image:string
-  public template_posts_message:string
-  public template_posts_userPost:string
-  public template_posts_mood:string
-  public template_posts_date:Date
-
-  public openComms = false
-
   public postId
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private post: PostService) {
    }
 
@@ -54,11 +35,18 @@ export class PostsComponent implements OnInit {
   }
 
   onOpenComms(){
-    this.openComms = true
+
   }
 
-  onCloseComms(){
-    this.openComms = false
+  onTrashPost(postId){
+    this.post.deletePost(postId).then(
+      (response: { message: string }) => {
+        console.log(response.message);
+        // refresh de la liste des posts
+        this.post.getAllPost();
+      }
+    ).catch(
+      (error) => {console.log(error) }
+    );
   }
-
 }
