@@ -63,6 +63,7 @@ export class PostComponent implements OnInit {
     newPost.keywords = this.postForm.get('keywords').value;
     newPost.message = this.postForm.get('message').value;
     newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;
+    newPost.postDate = Date.now()
 
     this.postService.newPost(this.auth.getUserId(), newPost, newPost.imagePostUrl)
     .then(

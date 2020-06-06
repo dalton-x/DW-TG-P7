@@ -6,7 +6,9 @@ const Post = db.post;
 // Sauvegarde la création d'un nouveau post
 exports.createPost = (req, res) => {
   const id = req.params.id;
-  
+  const date = Date.now()
+  console.log("DAte",date)
+
   if (req.file) {
     const parseBody = JSON.parse(req.body.post)
 
@@ -20,7 +22,7 @@ exports.createPost = (req, res) => {
       message: parseBody.message,
       like: 0,
       imagePostUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-      postDate: new Date()
+      postDate: date
     }
 
     // Création du post dans la BDD

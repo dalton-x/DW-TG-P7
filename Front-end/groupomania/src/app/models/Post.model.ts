@@ -8,5 +8,5 @@ export class Post {
   keywords: string;
   message: string;
   like: string;
-  postDate: Date
+  postDate: number;
 }

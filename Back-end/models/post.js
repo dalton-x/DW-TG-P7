@@ -33,7 +33,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       postDate: {
         type: Sequelize.DATE,
-        defaultValue: 0
       }
     },{
         timestamps: false
