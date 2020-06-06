@@ -73,6 +73,7 @@ exports.logIn = (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         pseudo: user.pseudo,
+        isAdmin: user.isAdmin,
         imageUrl: user.imageUrl,
         token: jwt.sign(          //utilisisation de jsonWebToken
           { userId: user.id },   //gestion du UserId

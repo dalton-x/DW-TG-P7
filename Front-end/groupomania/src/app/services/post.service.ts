@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Post } from '../models/Post.model';
 import { Subject } from 'rxjs';
+import { FunctionsGlobalService } from './functions-global.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class PostService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private func :FunctionsGlobalService
   ) { }
 
   newPost(id: string, postData : Object, image: string | File) {
@@ -45,13 +47,25 @@ export class PostService {
   getAllPost() {
     this.http.get('http://localhost:3000/api/post/').subscribe(
       (post: Post[]) => {
-        console.log("post",post)
-        this.post$.next(post);
+          this.post$.next(post);
       },
       (error) => {
         this.post$.next([]);
         console.error(error);
       }
     );
+  }
+
+  deletePost(postId : string){
+    return new Promise((resolve, reject) => {
+      this.http.delete('http://localhost:3000/api/post/'+ postId).subscribe(
+        (response: { message: string }) => {
+          resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 }

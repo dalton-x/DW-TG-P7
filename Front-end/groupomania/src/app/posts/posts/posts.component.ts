@@ -33,6 +33,7 @@ export class PostsComponent implements OnInit {
 
   public openComms = false
 
+  public postId
   constructor(
     private auth: AuthService,
     private post: PostService) {

@@ -32,6 +32,9 @@
       <div class="col-md-2">
         <button class="btn btn-success" (click)="onOpenComms()">commentaire</button>
       </div>
+      <div class="col-md-2 offset-7">
+        <button class="btn btn-default" *ngIf="this.auth.isAdmin || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
+      </div>
     </div>
   </div>
 </div>

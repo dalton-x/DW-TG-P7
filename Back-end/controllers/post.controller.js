@@ -1,5 +1,5 @@
 const db = require("../models");
-// const fs = require('fs');
+const fs = require('fs');
 // const User = db.user;
 const Post = db.post;
 
@@ -103,5 +103,21 @@ exports.updatePost = (req, res, next) => {
   
 // Supprime le post en fonction de son Id
 exports.deletePost = (req, res) => {
-  
+  Post.findOne( { where: { id: req.params.postId } })  
+  .then(post => {
+    if (post.dataValues.imagePostUrl){
+      const filename = post.dataValues.imagePostUrl.split('/images/')[1];
+      fs.unlink(`images/${filename}`, () => {
+        Post.destroy({ where: { id: req.params.postId } })
+        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+        .catch(error => res.status(400).json({ error }));
+      });
+        
+    }else{
+      Post.destroy({ where: { id: req.params.postId } })
+        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+        .catch(error => res.status(400).json({ error }));
+    }
+  })
+  .catch(error => res.status(500).json({ error }));  
 };

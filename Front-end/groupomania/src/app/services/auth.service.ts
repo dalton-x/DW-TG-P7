@@ -20,6 +20,9 @@ export class AuthService {
   private user: User;
   private authToken: string;
 
+
+  public isAdmin: Boolean = false;
+
   constructor(private http: HttpClient,
               private router: Router) {}
 
@@ -41,6 +44,9 @@ export class AuthService {
   getToken() {
     return this.authToken;
   }
+  getUserIsAdmin() {
+    return this.isAdmin;
+  }
 
   setCurrentUser(user: User) {
     this.user = user;
@@ -53,9 +59,9 @@ export class AuthService {
   create(lastname: string , firstname: string , pseudo: string ,email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/user/signup', {
-          lastname: lastname ,
-          firstname: firstname ,
-          pseudo: pseudo ,
+          lastname: lastname,
+          firstname: firstname,
+          pseudo: pseudo,
           email: email,
           password: password,
         }).subscribe(
@@ -80,6 +86,7 @@ export class AuthService {
           firstname: string,
           lastname: string,
           pseudo: string,
+          isAdmin: boolean,
           imageUrl: string,
           token: string}) => {
             this.userId = response.userId
@@ -89,6 +96,7 @@ export class AuthService {
             this.pseudo = response.pseudo
             this.imageUrl = response.imageUrl
             this.authToken = response.token;
+            this.isAdmin = response.isAdmin;
             this.onToken.next(true);
             resolve(
               this.isOnline = true

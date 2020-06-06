@@ -9,15 +9,15 @@ export class FunctionsGlobalService {
 
   constructor() { }
 
-getLogin(){
-  localStorage.getItem('log')
-}
-
-getOnline(){
-  if (this.getLogin() !== null){
-    this.userOnline = true
-  }else{
-    this.userOnline = false
+  getLogin(){
+    localStorage.getItem('log')
   }
-}
+
+  getOnline(){
+    if (this.getLogin() !== null){
+      this.userOnline = true
+    }else{
+      this.userOnline = false
+    }
+  }
 }
