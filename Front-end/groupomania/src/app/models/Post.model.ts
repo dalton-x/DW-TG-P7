@@ -4,7 +4,7 @@ export class Post {
   userPseudo: string;
   title: string;
   imagePostUrl: string;
-  humeur: string;
+  mood: string;
   keywords: string;
   message: string;
   postDate: Date

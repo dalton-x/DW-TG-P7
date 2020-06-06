@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
       imagePostUrl: {
         type: Sequelize.STRING
       },
-      humeur: {
+      mood: {
         type: Sequelize.STRING,
         require: true
       },
