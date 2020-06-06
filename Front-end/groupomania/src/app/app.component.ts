@@ -18,7 +18,7 @@ export class AppComponent {
   authSubscription: Subscription;
 
   constructor(private functionsGlobal : FunctionsGlobalService,
-              private auth: AuthService,
+              public auth: AuthService,
               private router: Router
   ) { }
 

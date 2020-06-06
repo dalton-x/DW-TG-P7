@@ -4,6 +4,10 @@
       <a class="navbar-brand" routerLink=""> <img src="../assets/logo/logo.png" alt="Logo de l'entreprise Groupomania"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="this.auth.isAdmin" style="color: red;"> <h4>Compte Admin Actif</h4>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
       <li routerLinkActive="active"><a *ngIf="isOnline" routerLink="timeline/post">Publier un post</a>
       </li>
       <li routerLinkActive="active"><a *ngIf="isOnline && isAdmin" routerLink="timeline/post">Admin</a>
