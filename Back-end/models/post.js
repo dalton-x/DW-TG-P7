@@ -27,6 +27,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         require: true
       },
+      like: {
+        type: Sequelize.STRING,
+        require: true
+      },
       postDate: {
         type: Sequelize.DATE,
         defaultValue: 0

@@ -10,7 +10,7 @@
 
         <img alt="Photo de profil" [src]="imagePreview" *ngIf="imagePreview" class="rounded img-fluid mx-auto d-block">
         <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
-        <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imageInput.click()">CHANGER</button>
+        <button class="btn-default image btn btn-danger mx-auto d-block primary mt-2" (click)="imageInput.click()">CHANGER</button>
         <input class="image" type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
         <br>
         <p class="h3">Informations Personnel :</p>
@@ -25,8 +25,8 @@
           <input type="text" class="form-control" id="lastname" formControlName="lastname">
         </div>
 
-        <button class="btn btn-success mx-auto d-block" [disabled]="profilForm.invalid" (click)="onUpdate()">METTRE A JOUR</button>
-        <button class="btn btn-danger mx-auto d-block" (click)="onDelete()">SUPPRIMER</button>
+        <button class="btn btn-success mx-auto d-block mt-2" [disabled]="profilForm.invalid" (click)="onUpdate()">METTRE A JOUR</button>
+        <button class="btn btn-danger mx-auto d-block mt-2" (click)="onDelete()">SUPPRIMER</button>
       </form>
     </div>
 	</div>

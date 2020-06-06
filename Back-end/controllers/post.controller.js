@@ -3,8 +3,6 @@ const db = require("../models");
 // const User = db.user;
 const Post = db.post;
 
-
-
 // Sauvegarde la création d'un nouveau post
 exports.createPost = (req, res) => {
   const id = req.params.id;
@@ -15,12 +13,13 @@ exports.createPost = (req, res) => {
     // on construit l'objet avec l'image
     newPost = {
       userPostId: id,
-      userPseudoPost: parseBody.userPseudo,
+      userPseudoPost: parseBody.userPseudoPost,
       title: parseBody.title,
-      humeur: parseBody.humeur,
+      mood: parseBody.mood,
       keywords: parseBody.keywords,
       message: parseBody.message,
-      imagePostUrl: `${req.protocol}://${req.get('host')}/images_Post/${req.file.filename}`,
+      like: 0,
+      imagePostUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
       postDate: new Date()
     }
 
@@ -40,11 +39,12 @@ exports.createPost = (req, res) => {
     // on construit l'objet
     newPost = {
       userPostId: id,
-      userPseudoPost: req.body.userPseudo,
+      userPseudoPost: req.body.userPseudoPost,
       title: req.body.title,
-      humeur: req.body.humeur,
+      mood: req.body.mood,
       keywords: req.body.keywords,
       message: req.body.message,
+      like: 0,
       postDate: new Date()
     }
 
@@ -62,6 +62,16 @@ exports.createPost = (req, res) => {
   }  
 };
 
+//Retourne tout les posts de la base de données
+exports.getPostByKeywords = (req, res) => {
+  let keywords = req.params.keywords
+  Post.findAll({where: {keywords:keywords}})
+  .then(keyword => {
+    res.status(200).json(keyword);
+    console.log("KEYWORDS",keyword)
+  });
+};
+
 // Recuperation d'un post avec son Id
 exports.getOnePost = (req, res, next) => {
   
@@ -69,7 +79,21 @@ exports.getOnePost = (req, res, next) => {
 
 // Retourne tout les posts de la base de données
 exports.getAllPost = (req, res) => {
-    
+  Post.findAll({
+    order: [ 
+      ['postDate', 'DESC']    // ordre de tri 'descresendo' en fonction de la collonne date
+    ],
+  }).then( // recherche de toutes les information des la BDD
+    (posts) => { // si information trouvées
+      res.status(200).json(posts); // retour des informations en objets
+    }
+  ).catch(  // si pas de posts trouvées
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
 };
 
 // Met a jour les données du post selectionné

@@ -1,8 +1,20 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
-      <li routerLinkActive="active"><a routerLink="post">Ecrire un post</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="container-fluid">
+	<div class="row m-5">
+    <!-- Liste des mots clés -->
+    <div class="col-md-2 mt-2" *ngIf="searchForm">
+      <form [formGroup]="searchForm">
+        <p>Recherche par mots-clés :</p>
+        <input class="form-control" type="text" id="search" formControlName="search">
+        <br>
+        <button class="btn btn-success" (click)="onSearch()">Rechercher</button>
+      </form>
+    </div>
+		<div class="col-md-8 offset-1 mt-2">
+      <!-- Posts -->
+      <app-posts></app-posts>
+		</div>
+	</div>
+</div>
+
+
+

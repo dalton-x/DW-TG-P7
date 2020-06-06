@@ -8,8 +8,8 @@ import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  templateUrl: './new-post.component.html',
+  styleUrls: ['./new-post.component.scss']
 })
 export class PostComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class PostComponent implements OnInit {
   user: User;
   post: Post;
   title: string;
-  humeur: string;
+  mood: string;
   keywords: string;
   message: string;
   imagePostUrl: File = null;
@@ -46,7 +46,7 @@ export class PostComponent implements OnInit {
     this.postForm = this.formBuilder.group({
       idUser: [this.user.id],
       title: ['Votre titre', Validators.required],
-      humeur: ['', Validators.required],
+      mood: ['', Validators.required],
       keywords: ['Un mot clé'],
       message: ['Votre message', Validators.required],
       imagePostUrl: ['']
@@ -58,8 +58,8 @@ export class PostComponent implements OnInit {
 
     const newPost = new Post();
     newPost.title = this.postForm.get('title').value;
-    newPost.userPseudo = this.user.pseudo;
-    newPost.humeur = this.postForm.get('humeur').value;
+    newPost.userPseudoPost = this.user.pseudo;
+    newPost.mood = this.postForm.get('mood').value;
     newPost.keywords = this.postForm.get('keywords').value;
     newPost.message = this.postForm.get('message').value;
     newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;

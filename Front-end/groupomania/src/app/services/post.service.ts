@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Post } from '../models/Post.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+
+  post$ = new Subject<Post[]>();
 
   constructor(
     private http: HttpClient,
@@ -37,5 +41,17 @@ export class PostService {
         );
       }
     });
+  }
+  getAllPost() {
+    this.http.get('http://localhost:3000/api/post/').subscribe(
+      (post: Post[]) => {
+        console.log("post",post)
+        this.post$.next(post);
+      },
+      (error) => {
+        this.post$.next([]);
+        console.error(error);
+      }
+    );
   }
 }

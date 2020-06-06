@@ -14,7 +14,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { UpdateUserComponent } from './profil/update-user/update-user.component';
 import { DeleteUserComponent } from './profil/delete-user/delete-user.component';
 import { LegalComponent } from './legal/legal.component';
-import { PostComponent } from './posts/post/post.component';
+import { PostComponent } from './posts/new-post/new-post.component';
 
 
 const routes: Routes = [
@@ -22,14 +22,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'index', component: IndexComponent},
   { path: 'legal', component: LegalComponent },
-  { path: 'timeline', component: TimelineComponent}, //, canActivate: [AuthGuard]
-  { path: 'profil', component: ProfilComponent}, //, canActivate: [AuthGuard]
-  { path: 'updateUser', component: UpdateUserComponent}, //, canActivate: [AuthGuard]
-  { path: 'deleteUser', component: DeleteUserComponent}, //, canActivate: [AuthGuard]
-  { path: 'timeline/post', component: PostComponent}, //, canActivate: [AuthGuard]
+  { path: 'timeline', canActivate: [AuthGuard], component: TimelineComponent},
+  { path: 'profil', canActivate: [AuthGuard], component: ProfilComponent},
+  { path: 'updateUser', canActivate: [AuthGuard], component: UpdateUserComponent},
+  { path: 'deleteUser', canActivate: [AuthGuard], component: DeleteUserComponent},
+  { path: 'timeline/post', canActivate: [AuthGuard], component: PostComponent},
   { path: '', component: IndexComponent},
   { path: 'not-found', component: FourOhFourComponent},
-  { path: '**', redirectTo: '/not-found'} //mettre a la fin des routes
+  { path: '**', redirectTo: '/not-found'} //mettre à la fin des routes
 ];
 
 @NgModule({
