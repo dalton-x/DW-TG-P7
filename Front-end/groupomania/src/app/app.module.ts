@@ -17,7 +17,8 @@ import { ProfilComponent } from './profil/profil.component';
 import { TimelineComponent } from './posts/timeline/timeline.component';
 import { AuthService } from './services/auth.service';
 import { UpdateUserComponent } from './profil/update-user/update-user.component';
-import { PostComponent } from './posts/post/post.component';
+import { PostComponent } from './posts/new-post/new-post.component';
+import { PostsComponent } from './posts/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PostComponent } from './posts/post/post.component';
     ProfilComponent,
     TimelineComponent,
     UpdateUserComponent,
-    PostComponent
+    PostComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,

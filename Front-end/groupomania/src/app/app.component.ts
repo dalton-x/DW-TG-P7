@@ -14,6 +14,7 @@ export class AppComponent {
 
   isAuth: boolean;
   isOnline: boolean;
+  isAdmin: boolean;
   authSubscription: Subscription;
 
   constructor(private functionsGlobal : FunctionsGlobalService,
