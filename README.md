@@ -4,9 +4,9 @@
 
 * *Pour installer les packages nodeJS :*
 
-     * ```npm install``` puis  ```npm run install ```
+     * ```npm install```
 
 
 * *Pour lancer le projet :*
 
-    * ```npm install``` puis ```npm run mvp```
+    * ```npm run mvp```
