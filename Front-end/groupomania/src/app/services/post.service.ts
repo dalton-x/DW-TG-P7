@@ -44,6 +44,20 @@ export class PostService {
       }
     });
   }
+
+  getPostByKeywords(keywords) {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/post/'+keywords).subscribe(
+        (posts: Post) => {
+          resolve(posts);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
   getAllPost() {
     this.http.get('http://localhost:3000/api/post/').subscribe(
       (post: Post[]) => {

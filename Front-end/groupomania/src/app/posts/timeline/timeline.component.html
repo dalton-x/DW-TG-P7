@@ -1,18 +1,13 @@
 <div class="container-fluid">
 	<div class="row m-5">
-    <!-- Liste des mots clés -->
-    <div class="col-md-2 mt-2 rounded" *ngIf="searchForm" style="position: fixed; background-color: #E0E0E0; border: 0.5px solid #C4C4C4;">
-      <form [formGroup]="searchForm">
-        <p class="rounded mt-2 text-center" style="background-color: grey; color: white;">Recherche par mots-clés :</p>
-        <input class="form-control" type="text" id="search" formControlName="search">
-        <br>
-        <button class="btn btn-success mb-2" (click)="onSearch()" style="color: #000000;">Rechercher</button>
-      </form>
+    <!-- Recherche par mots clés -->
+    <div class="col-md-10">
+      <app-keywords></app-keywords>
     </div>
-		<div class="col-md-8 offset-3 mt-2">
-      <!-- Posts -->
+    <!-- Posts -->
+    <div class="col-md-8 offset-3 mt-2">
       <app-posts></app-posts>
-		</div>
+    </div>
 	</div>
 </div>
 

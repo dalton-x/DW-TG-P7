@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <div class="col-md-2 mt-2 rounded" *ngIf="searchForm" style="position: fixed; background-color: #E0E0E0; border: 0.5px solid #C4C4C4;">
+    <form [formGroup]="searchForm">
+      <p class="rounded mt-2 text-center" style="background-color: grey; color: white;">Recherche par mots-clés :</p>
+      <input class="form-control" type="text" id="search" formControlName="search">
+      <br>
+      <button class="search btn btn-success mb-2" (click)="onSearch()" style="color: #000000;">Rechercher</button>
+      <p *ngIf="this.posts != undefined">Le nombre de posts trouvé est de : {{ posts.length }} </p>
+    </form>
+  </div>
+
+  <div *ngFor="let post of posts">
+    <div class="card mb-3 offset-4" style="background-color: #e0e0e0;">
+      <div class="card-header" style="background-color: grey;">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="align-middle" style="color: white;">
+              {{ post.userPseudoPost }}
+            </h4>
+          </div>
+          <div class="col-md-5">
+            <p class="text-right align-middle" style="color: white;">
+              {{ post.postDate | dateInterval}}
+            </p>
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCloseSearch()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title text-center mb-3"> {{ post.title }} </h5>
+        <div class="row">
+          <div class="col-5 offset-1 mb-3"> {{ post.message }} </div>
+          <div class="col-md-4 offset-1">
+            <img class="img-fluid mb-3 ml-5" [src]="post.imagePostUrl" *ngIf="post.imagePostUrl" style="max-width: 340px; max-height: 340px; width:90%; height: 90%;" alt="La photo du post">
+          </div>
+        </div>
+        <div class="col-md-5 offset-5" *ngIf="post.mood != '0'">
+          <div>Votre humeur : {{ post.mood }} </div>
+        </div>
+      </div>
+      <div class="row mb-2 offset-1">
+        <button class="btn btn-primary" style="color: black;" (click)="this.post.onLike()" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button>
+        <div class="col-md-2">
+          <button class="btn btn-success" style="color: black;" (click)="this.post.onOpenComms()" title="Afficher les commentaires">Commentaire</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

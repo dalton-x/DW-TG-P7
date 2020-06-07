@@ -45,10 +45,10 @@ export class PostComponent implements OnInit {
   initPostForm(user:User){
     this.postForm = this.formBuilder.group({
       idUser: [this.user.id],
-      title: ['Votre titre', Validators.required],
+      title: ['', Validators.required],
       mood: ['', Validators.required],
-      keywords: ['Un mot clé'],
-      message: ['Votre message', Validators.required],
+      keywords: [''],
+      message: ['', Validators.required],
       imagePostUrl: ['']
     });
   }

@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { UpdateUserComponent } from './profil/update-user/update-user.component';
 import { PostComponent } from './posts/new-post/new-post.component';
 import { PostsComponent } from './posts/posts/posts.component';
+import { KeywordsComponent } from './posts/keywords/keywords.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PostsComponent } from './posts/posts/posts.component';
     TimelineComponent,
     UpdateUserComponent,
     PostComponent,
-    PostsComponent
+    PostsComponent,
+    KeywordsComponent
   ],
   imports: [
     BrowserModule,

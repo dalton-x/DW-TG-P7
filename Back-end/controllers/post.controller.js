@@ -7,7 +7,6 @@ const Post = db.post;
 exports.createPost = (req, res) => {
   const id = req.params.id;
   const date = Date.now()
-  console.log("DAte",date)
 
   if (req.file) {
     const parseBody = JSON.parse(req.body.post)
@@ -67,10 +66,14 @@ exports.createPost = (req, res) => {
 //Retourne tout les posts de la base de données
 exports.getPostByKeywords = (req, res) => {
   let keywords = req.params.keywords
-  Post.findAll({where: {keywords:keywords}})
+  Post.findAll({
+    where: {keywords:keywords},
+    order: [ 
+      ['postDate', 'DESC']    // ordre de tri 'descresendo' en fonction de la collonne date
+    ],
+  })
   .then(keyword => {
     res.status(200).json(keyword);
-    console.log("KEYWORDS",keyword)
   });
 };
 
