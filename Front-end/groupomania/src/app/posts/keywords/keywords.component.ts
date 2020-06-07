@@ -13,8 +13,10 @@ import { Router } from '@angular/router';
 })
 export class KeywordsComponent implements OnInit {
 
-  public searchForm: FormGroup;
+  public searchFormKeyword: FormGroup;
+  public searchFormUser: FormGroup;
   keywords: string;
+  user: string;
   postSub: Subscription;
   public posts
 
@@ -29,19 +31,41 @@ export class KeywordsComponent implements OnInit {
   }
 
   initForm(){
-    this.searchForm = this.formBuilder.group({
-      search: ['', Validators.required]
+    this.searchFormKeyword = this.formBuilder.group({
+      searchKeywords: ['', Validators.required]
+    })
+    this.searchFormUser = this.formBuilder.group({
+      searchUser: ['', Validators.required]
     })
   }
 
-  onSearch(){
-    this.keywords = this.searchForm.get('search').value
+  onSearchKeyword(){
+    this.keywords = this.searchFormKeyword.get('searchKeywords').value
+    console.log("this.user",this.user)
+    console.log("this.keywords",this.keywords)
     if (this.keywords){
       this.post.getPostByKeywords(this.keywords)
       .then(
         (Posts) => {
         this.posts = Posts;
-        console.log("this.posts",this.posts)
+        }
+      ).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  onSearchUser(){
+    this.user = this.searchFormUser.get('searchUser').value
+    console.log("this.user",this.user)
+    console.log("this.keywords",this.keywords)
+    if (this.user){
+      this.post.getPostByUser(this.user)
+      .then(
+        (Posts) => {
+        this.posts = Posts;
         }
       ).catch(
         (error) => {

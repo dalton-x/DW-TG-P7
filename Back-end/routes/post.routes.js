@@ -8,7 +8,8 @@ module.exports = app => {
   var router = require("express").Router();
 
   router.post("/create/:id",auth, multer, postCtrl.createPost);         // Création d'un post par un utilisateur
-  router.get("/:keywords",auth, multer, postCtrl.getPostByKeywords);    // Récupération des mots clés     
+  router.get("/keyword/:keywords",auth, multer, postCtrl.getPostByKeywords);    // Récupération des posts par mots clés     
+  router.get("/user/:user",auth, multer, postCtrl.getPostByUser);       // Récupération des posts par son utilisateur     
   router.get("/",auth, multer, postCtrl.getAllPost);                    // Récuperer tout les posts crées
   router.get("/:id",auth, multer, postCtrl.getOnePost);                 // Récupere un pot en fonction de son Id
   router.put("/:id",auth, multer, postCtrl.updatePost);                 // Mettre a jour un post

@@ -1,12 +1,21 @@
 <div class="col-md-12">
-  <div class="col-md-2 mt-2 rounded" *ngIf="searchForm" style="position: fixed; background-color: #E0E0E0; border: 0.5px solid #C4C4C4;">
-    <form [formGroup]="searchForm">
+  <div class="col-md-2 mt-2 rounded" *ngIf="searchFormKeyword || searchFormUser" style="position: fixed; background-color: #E0E0E0; border: 0.5px solid #C4C4C4;">
+    <form [formGroup]="searchFormKeyword">
+      <!-- Mot-clé -->
       <p class="rounded mt-2 text-center" style="background-color: grey; color: white;">Recherche par mots-clés :</p>
-      <input class="form-control" type="text" id="search" formControlName="search">
+      <input class="form-control" type="text" id="searchKeywords" formControlName="searchKeywords">
       <br>
-      <button class="search btn btn-success mb-2" (click)="onSearch()" style="color: #000000;">Rechercher</button>
-      <p *ngIf="this.posts != undefined">Le nombre de posts trouvé est de : {{ posts.length }} </p>
+      <button class="search btn btn-success mb-2" (click)="onSearchKeyword()" style="color: #000000;">Rechercher</button>
     </form>
+    <form [formGroup]="searchFormUser">
+      <!-- Par user -->
+      <p class="rounded mt-2 text-center" style="background-color: grey; color: white;">Recherche par utilisateur :</p>
+      <input class="form-control" type="text" id="searchUser" formControlName="searchUser">
+      <br>
+      <button class="search btn btn-success mb-2" (click)="onSearchUser()" style="color: #000000;">Rechercher</button>
+    </form>
+
+    <p *ngIf="this.posts != undefined">Le nombre de posts trouvé est de : {{ posts.length }} </p>
   </div>
 
   <div *ngFor="let post of posts">

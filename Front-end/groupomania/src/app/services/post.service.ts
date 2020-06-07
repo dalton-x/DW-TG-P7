@@ -47,7 +47,20 @@ export class PostService {
 
   getPostByKeywords(keywords) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/post/'+keywords).subscribe(
+      this.http.get('http://localhost:3000/api/post/keyword/'+keywords).subscribe(
+        (posts: Post) => {
+          resolve(posts);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getPostByUser(user) {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/post/user/'+user).subscribe(
         (posts: Post) => {
           resolve(posts);
         },

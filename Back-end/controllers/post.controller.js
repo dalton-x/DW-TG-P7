@@ -77,6 +77,20 @@ exports.getPostByKeywords = (req, res) => {
   });
 };
 
+//Retourne tout les posts de la base de données
+exports.getPostByUser = (req, res) => {
+  let user = req.params.user
+  Post.findAll({
+    where: {userPseudoPost:user},
+    order: [ 
+      ['postDate', 'DESC']    // ordre de tri 'descresendo' en fonction de la collonne date
+    ],
+  })
+  .then(keyword => {
+    res.status(200).json(keyword);
+  });
+};
+
 // Recuperation d'un post avec son Id
 exports.getOnePost = (req, res, next) => {
   
