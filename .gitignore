@@ -1,5 +1,12 @@
 /Back-end/node_modules
-/back-end/images
+
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.ico
+*.bmp
+*.gif
 
 /Front-end/node_modules
 /Front-end/src/app/profil/images
