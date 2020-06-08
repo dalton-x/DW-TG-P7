@@ -3,14 +3,14 @@
     <form [formGroup]="searchFormKeyword">
       <!-- Mot-clé -->
       <p class="rounded mt-2 text-center" style="background-color: grey; color: white;">Recherche par mots-clés :</p>
-      <input class="form-control" type="text" id="searchKeywords" formControlName="searchKeywords">
+      <input class="form-control" type="text" id="searchKeywords" formControlName="searchKeywords" placeholder="Mot-clé">
       <br>
       <button class="search btn btn-success mb-2" (click)="onSearchKeyword()" style="color: #000000;">Rechercher</button>
     </form>
     <form [formGroup]="searchFormUser">
       <!-- Par user -->
       <p class="rounded mt-2 text-center" style="background-color: grey; color: white;">Recherche par utilisateur :</p>
-      <input class="form-control" type="text" id="searchUser" formControlName="searchUser">
+      <input class="form-control" type="text" id="searchUser" formControlName="searchUser"  placeholder="Pseudo">
       <br>
       <button class="search btn btn-success mb-2" (click)="onSearchUser()" style="color: #000000;">Rechercher</button>
     </form>
@@ -20,11 +20,12 @@
 
   <div *ngFor="let post of posts">
     <div class="card mb-3 offset-4" style="background-color: #e0e0e0;">
+
       <div class="card-header" style="background-color: grey;">
         <div class="row">
           <div class="col-md-6">
             <h4 class="align-middle" style="color: white;">
-              {{ post.userPseudoPost }}
+              <a href="timeline/#{{post.id}}">{{ post.userPseudoPost }}</a>
             </h4>
           </div>
           <div class="col-md-5">
@@ -51,12 +52,12 @@
           <div>Votre humeur : {{ post.mood }} </div>
         </div>
       </div>
-      <div class="row mb-2 offset-1">
-        <button class="btn btn-primary" style="color: black;" (click)="this.post.onLike()" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button>
+      <!-- <div class="row mb-2 offset-1">
+        <button class="btn btn-primary" style="color: black;" (click)="this.postsCom.onLike(post.id)" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button>
         <div class="col-md-2">
-          <button class="btn btn-success" style="color: black;" (click)="this.post.onOpenComms()" title="Afficher les commentaires">Commentaire</button>
+          <button class="btn btn-success" style="color: black;" (click)="this.postsCom.onOpenComms(post.id)" title="Afficher les commentaires">Commentaire</button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

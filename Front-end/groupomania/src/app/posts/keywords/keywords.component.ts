@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { Post } from 'src/app/models/Post.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-keywords',
@@ -17,12 +14,10 @@ export class KeywordsComponent implements OnInit {
   public searchFormUser: FormGroup;
   keywords: string;
   user: string;
-  postSub: Subscription;
   public posts
 
   constructor(private post: PostService,
               public auth: AuthService,
-              private router: Router,
               private formBuilder: FormBuilder
               ) { }
 
@@ -41,8 +36,6 @@ export class KeywordsComponent implements OnInit {
 
   onSearchKeyword(){
     this.keywords = this.searchFormKeyword.get('searchKeywords').value
-    console.log("this.user",this.user)
-    console.log("this.keywords",this.keywords)
     if (this.keywords){
       this.post.getPostByKeywords(this.keywords)
       .then(
@@ -59,8 +52,6 @@ export class KeywordsComponent implements OnInit {
 
   onSearchUser(){
     this.user = this.searchFormUser.get('searchUser').value
-    console.log("this.user",this.user)
-    console.log("this.keywords",this.keywords)
     if (this.user){
       this.post.getPostByUser(this.user)
       .then(
@@ -77,5 +68,10 @@ export class KeywordsComponent implements OnInit {
 
   onCloseSearch(){
     this.posts = null
+  }
+
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 }

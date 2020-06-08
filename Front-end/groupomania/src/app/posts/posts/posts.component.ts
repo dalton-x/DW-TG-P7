@@ -30,12 +30,12 @@ export class PostsComponent implements OnInit {
     this.post.getAllPost();
   }
 
-  onLike(){
-
+  onLike(postId: string){
+    console.log("J'aime le post : "+postId)
   }
 
-  onOpenComms(){
-
+  onOpenComms(postId){
+    console.log("Je commente le post : "+postId)
   }
 
   onTrashPost(postId){
