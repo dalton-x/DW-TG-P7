@@ -27,7 +27,11 @@ export class AuthService {
               private router: Router) {}
 
   getUserId() {
-    return this.userId;
+    if (this.userId){
+      return this.userId;
+    }else{
+      return localStorage.getItem('userId')
+    }
   }
   getUserFistname() {
     return this.firstname;
@@ -42,7 +46,11 @@ export class AuthService {
     return this.imageUrl;
   }
   getToken() {
-    return this.authToken;
+    if (this.authToken){
+      return this.authToken;
+    }else{
+      return localStorage.getItem('token')
+    }
   }
   getUserIsAdmin() {
     return this.isAdmin;
@@ -97,11 +105,13 @@ export class AuthService {
             this.imageUrl = response.imageUrl
             this.authToken = response.token;
             this.isAdmin = response.isAdmin;
+            localStorage.setItem('userId',this.userId);
+            localStorage.setItem('token',this.authToken);
             this.onToken.next(true);
             resolve(
               this.isOnline = true
               );
-        },
+          },
         (error) => {
           reject(error);
         }
@@ -110,6 +120,7 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.clear();
     this.authToken = null;
     this.onToken.next(false);
     this.isOnline = false;

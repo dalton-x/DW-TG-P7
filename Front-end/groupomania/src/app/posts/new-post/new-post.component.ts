@@ -75,8 +75,8 @@ export class PostComponent implements OnInit {
         console.error(error);
       }
     );
-    this.router.navigate(['/timeline'])
     this.postService.getAllPost()
+    this.router.navigate(['/timeline'])
   }
 
 

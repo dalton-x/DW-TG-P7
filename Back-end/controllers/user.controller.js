@@ -117,12 +117,16 @@ exports.update = (req, res, next) => {
   .then(user => {
       // Récupération du nom de l'image
       const filename = user.imageUrl.split('/images/')[1];
-      if (filename !== 'user.png'){
-      // Suppression de l'ancienne image      
-        fs.unlink(`images/${filename}`, function (error) {
-          if (error) throw error;
-        });
-      }    
+      if (filename){
+        if (filename !== 'user.png'){
+        // Suppression de l'ancienne image      
+          fs.unlink(`images/${filename}`, function (error) {
+            if (error) throw error;
+          });
+        }    
+      }else{
+        return res.status(500).json("Le nom de l'image n'a pas été trouvé")
+      }
     const parseBody = JSON.parse(req.body.user)
     // on construit l'objet qui sera mis à jour avec la nouvelle image
     updatedUser = {
@@ -135,7 +139,7 @@ exports.update = (req, res, next) => {
     .then(() => res.status(203).json({ message: 'Utilisateur Mis a jour' }))
     .catch(error => res.status(401).json({ error }));
   })
-  .catch(error => res.status(502).json({ error }));
+  .catch(error => res.status(501).json({ error }));
   
   } else {
     //on construit l'objet qui sera mis à jour avec la même image

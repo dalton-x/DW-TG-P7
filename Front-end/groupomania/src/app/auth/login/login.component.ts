@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     this.auth.login(email, password).then(
-      () => {
+      (res: { userId: string, authToken: string}) => {
+        console.log("res",res)
         localStorage.setItem('auth',JSON.stringify(true))
         this.app.isOnline = true
         this.router.navigate(['/timeline']);
