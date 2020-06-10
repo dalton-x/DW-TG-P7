@@ -46,8 +46,8 @@ export class PostComponent implements OnInit {
     this.postForm = this.formBuilder.group({
       idUser: [this.user.id],
       title: ['', Validators.required],
-      mood: ['', Validators.required],
-      keywords: [''],
+      mood: ['0', Validators.required],
+      keywords: ['',[Validators.pattern('^[a-zA-Z0-9]*$')]],
       message: ['', Validators.required],
       imagePostUrl: ['']
     });
@@ -68,6 +68,7 @@ export class PostComponent implements OnInit {
     this.postService.newPost(this.auth.getUserId(), newPost, newPost.imagePostUrl)
     .then(
       (response: { message: string }) => {
+        this.postService.getAllPost()
         this.router.navigate(['/timeline']);
       }
     ).catch(
@@ -75,8 +76,8 @@ export class PostComponent implements OnInit {
         console.error(error);
       }
     );
-    this.postService.getAllPost()
     this.router.navigate(['/timeline'])
+    this.postService.getAllPost()
   }
 
 

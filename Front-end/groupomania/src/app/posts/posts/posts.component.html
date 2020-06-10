@@ -1,5 +1,5 @@
 <div *ngFor="let post of posts">
-  <div id="{{post.id}}" class="card mb-3" style="background-color: #e0e0e0;">
+  <div id="post_{{post.id}}" class="card mb-3" style="background-color: #e0e0e0;">
     <div class="card-header" style="background-color: grey;">
       <div class="row">
         <div class="col-md-6">
@@ -27,29 +27,13 @@
       </div>
     </div>
     <div class="row mb-2 offset-1">
-      <button class="btn btn-primary" style="color: black;" (click)="onLike(post.id)" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button>
-      <div class="col-md-2">
+      <!-- <button class="btn btn-primary" style="color: black;" (click)="onLike(post.id)" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button> -->
+      <!-- <div class="col-md-2"> -->
         <button class="btn btn-success" style="color: black;" (click)="this.onOpenComms(post.id)" title="Afficher les commentaires">Commentaire</button>
-      </div>
+      <!-- </div> -->
       <div class="col-md-2 offset-7">
         <button class="btn btn-default" *ngIf="this.auth.isAdmin || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- commentaires -->
-<!-- <div class="modal-content" *ngIf="openComms">
-  <div class="modal-header">
-    <h5 class="modal-title">Commentaires</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCloseComms()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Modal body text goes here.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Nouveau commentaire</button>
-  </div>
-</div> -->

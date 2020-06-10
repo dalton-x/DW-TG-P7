@@ -17,7 +17,7 @@ export class AuthService {
   public lastname: string;
   public pseudo: string;
   public imageUrl: string;
-  private user: User;
+  public user: User;
   private authToken: string;
 
 
@@ -30,7 +30,7 @@ export class AuthService {
     if (this.userId){
       return this.userId;
     }else{
-      return localStorage.getItem('userId')
+      return sessionStorage.getItem('userId')
     }
   }
   getUserFistname() {
@@ -49,7 +49,7 @@ export class AuthService {
     if (this.authToken){
       return this.authToken;
     }else{
-      return localStorage.getItem('token')
+      return sessionStorage.getItem('token')
     }
   }
   getUserIsAdmin() {
@@ -105,8 +105,8 @@ export class AuthService {
             this.imageUrl = response.imageUrl
             this.authToken = response.token;
             this.isAdmin = response.isAdmin;
-            localStorage.setItem('userId',this.userId);
-            localStorage.setItem('token',this.authToken);
+            sessionStorage.setItem('userId',this.userId);
+            sessionStorage.setItem('token',this.authToken);
             this.onToken.next(true);
             resolve(
               this.isOnline = true
@@ -120,7 +120,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     this.authToken = null;
     this.onToken.next(false);
     this.isOnline = false;

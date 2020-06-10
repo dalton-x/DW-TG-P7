@@ -20,7 +20,7 @@
               <div class="form-row">
                 <div class="col">
                   <label for="keywords" class="badge badge-default mt-3">Mots-clés</label>
-                  <input type="text" class="form-control" id="keywords" formControlName="keywords">
+                  <input type="text" class="form-control" id="keywords" formControlName="keywords" title="Uniquement Majuscule/Minuscule et chiffres autorisés" pattern="[0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöùûüç' ]+)">
                 </div>
                 <div class="col">
                   <label for="mood" class="badge badge-default mt-3">Votre humeur</label>

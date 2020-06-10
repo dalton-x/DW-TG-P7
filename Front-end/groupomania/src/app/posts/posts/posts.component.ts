@@ -12,7 +12,7 @@ import { Post } from '../../models/Post.model';
 export class PostsComponent implements OnInit {
 
   postsSub: Subscription;
-  posts: Post[];
+  public posts: Post[];
 
   public postId
   constructor(

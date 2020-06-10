@@ -22,3 +22,7 @@ img{
 select{
   text-align: center;
 }
+
+input:invalid {
+  border: 2px dashed red;
+}

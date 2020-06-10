@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     const password = this.signupForm.get('password').value;
     this.auth.create(lastname, firstname, pseudo, email, password).then(
       (response: { message: string }) => {
-        localStorage.setItem('auth',JSON.stringify(true))
+        sessionStorage.setItem('auth',JSON.stringify(true))
         this.app.isOnline = true
         this.router.navigate(['/login']);
       }

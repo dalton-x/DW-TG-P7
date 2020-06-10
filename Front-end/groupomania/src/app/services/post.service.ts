@@ -15,7 +15,7 @@ export class PostService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private func :FunctionsGlobalService
+    private funcGlob :FunctionsGlobalService
   ) { }
 
   newPost(id: string, postData : Object, image: string | File) {

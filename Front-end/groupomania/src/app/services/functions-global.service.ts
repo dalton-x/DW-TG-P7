@@ -10,7 +10,7 @@ export class FunctionsGlobalService {
   constructor() { }
 
   getLogin(){
-    localStorage.getItem('log')
+    sessionStorage.getItem('log')
   }
 
   getOnline(){
@@ -18,6 +18,15 @@ export class FunctionsGlobalService {
       this.userOnline = true
     }else{
       this.userOnline = false
+    }
+  }
+
+  // ajout d'un "s" si num > 1
+  getPlural(num) {
+    if (num == 1) {
+        return ""
+    } else {
+        return "s"
     }
   }
 }

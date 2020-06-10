@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Post } from 'src/app/models/Post.model';
+import { FunctionsGlobalService } from 'src/app/services/functions-global.service';
 
 @Component({
   selector: 'app-keywords',
@@ -14,11 +17,13 @@ export class KeywordsComponent implements OnInit {
   public searchFormUser: FormGroup;
   keywords: string;
   user: string;
-  public posts
+  public posts: Post[];
 
   constructor(private post: PostService,
               public auth: AuthService,
-              private formBuilder: FormBuilder
+              private formBuilder: FormBuilder,
+              public NgbModal: NgbModal,
+              public funcGlob: FunctionsGlobalService
               ) { }
 
   ngOnInit(): void {
@@ -39,7 +44,7 @@ export class KeywordsComponent implements OnInit {
     if (this.keywords){
       this.post.getPostByKeywords(this.keywords)
       .then(
-        (Posts) => {
+        (Posts: Post[]) => {
         this.posts = Posts;
         }
       ).catch(
@@ -55,7 +60,7 @@ export class KeywordsComponent implements OnInit {
     if (this.user){
       this.post.getPostByUser(this.user)
       .then(
-        (Posts) => {
+        (Posts: Post[]) => {
         this.posts = Posts;
         }
       ).catch(
@@ -70,8 +75,7 @@ export class KeywordsComponent implements OnInit {
     this.posts = null
   }
 
-  scrollToElement($element): void {
-    console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  scrollOnPost(postId: string){
+    document.querySelector("#post_" + postId).scrollIntoView({behavior: "smooth"});
   }
 }

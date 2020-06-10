@@ -29,7 +29,7 @@ export class DeleteUserComponent implements OnInit {
         this.secondes = (value - start)*-1;
         if (this.secondes < 0){
           this.auth.logout();
-          localStorage.setItem('auth',JSON.stringify(false))
+          sessionStorage.setItem('auth',JSON.stringify(false))
           this.auth.delete(this.auth.getUserId())
           this.app.isOnline = false
           this.router.navigate(['/index']);

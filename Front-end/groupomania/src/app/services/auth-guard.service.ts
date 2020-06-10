@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const token = localStorage.getItem('token')
+    const token = sessionStorage.getItem('token')
     if(token) {
       this.myHeaders.set('Authorization', 'Bearer ' + token)
       return true;

@@ -69,7 +69,7 @@ exports.getPostByKeywords = (req, res) => {
   Post.findAll({
     where: {keywords:keywords},
     order: [ 
-      ['postDate', 'DESC']    // ordre de tri 'descresendo' en fonction de la collonne date
+      ['postDate', 'DESC']    // ordre de tri 'descresendo' en fonction de la colonne date
     ],
   })
   .then(keyword => {
