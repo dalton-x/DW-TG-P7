@@ -28,8 +28,8 @@ export class CommentService {
   }
 
 
-  getAllComments(){
-    this.http.get('http://localhost:3000/api/comment/').subscribe(
+  getAllComments(postId: string){
+    this.http.get('http://localhost:3000/api/comment/'+postId).subscribe(
       (comment: Comment[]) => {
           this.comment$.next(comment);
       },

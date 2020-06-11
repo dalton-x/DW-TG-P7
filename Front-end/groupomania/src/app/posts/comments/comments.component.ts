@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from 'src/app/models/Comment.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
+import { Post } from 'src/app/models/Post.model';
 
 @Component({
   selector: 'app-comments',
@@ -11,6 +12,7 @@ import { CommentService } from 'src/app/services/comment.service';
 export class CommentsComponent implements OnInit {
 
   @Input() public comment: Comment
+  @Input() public posts: Post
 
   constructor(public auth: AuthService,
               private comments: CommentService) { }
@@ -19,12 +21,13 @@ export class CommentsComponent implements OnInit {
     console.log("this.comment",this.comment)
   }
 
-  onTrashComment(postId){
-    this.comments.deleteComment(postId).then(
+  onTrashComment(){
+    console.log()
+    this.comments.deleteComment(this.comment.id).then(
       (response: { message: string }) => {
         console.log(response.message);
         // refresh de la liste des posts
-        this.comments.getAllComments();
+        this.comments.getAllComments(this.posts.id);
       }
     ).catch(
       (error) => {console.log(error) }

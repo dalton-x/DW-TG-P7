@@ -51,7 +51,7 @@
     </div>
     <div [ngClass]="{ 'hide': !display, 'show': display }" >
       <ng-container *ngFor="let comment of post.comments">
-        <app-comments [comment]='comment'></app-comments>
+        <app-comments [comment]='comment'  [posts]='post'></app-comments>
       </ng-container>
     </div>
   </div>

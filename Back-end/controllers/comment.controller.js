@@ -30,7 +30,16 @@ exports.createComment = (req, res) => {
 
 // Retourne tout les commentaires d'un post
 exports.getAllCommentOnePost = (req, res) => {
-    
+    let postId = req.params.postId
+    Comment.findAll({
+        where: {postId:postId},
+        order: [ 
+        ['commentDate', 'CRES']    // ordre de tri 'descresendo' en fonction de la colonne date
+        ],
+    })
+    .then(comment => {
+        res.status(200).json(comment);
+    });
 };
 
 // Met a jour les informations d'un commentaire
@@ -39,9 +48,11 @@ exports.update = (req, res, next) => {
 };
   
 // Supprime un commentaire en fonction de son id
-exports.delete = (req, res) => {
+exports.deleteComment = (req, res) => {
+    const reqParams = req.params
+    console.log("reqParams",reqParams)
     Comment.findOne( { where: { id: req.params.commentId } })  
-    .then(post => {
+    .then(comment => {
         Comment.destroy({ where: { id: req.params.commentId } })
           .then(() => res.status(200).json({ message: 'Commentaire supprimé !' }))
           .catch(error => res.status(400).json({ error }));

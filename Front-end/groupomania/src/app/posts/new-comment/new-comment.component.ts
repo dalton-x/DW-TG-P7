@@ -25,7 +25,7 @@ export class NewCommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCommentForm()
-    this.comSer.getAllComments()
+    this.comSer.getAllComments(this.posts.id)
   }
 
   initCommentForm(){
@@ -40,7 +40,7 @@ export class NewCommentComponent implements OnInit {
     newComment.pseudoComment = this.commentForm.get('pseudoComment').value;
     newComment.comment = this.commentForm.get('messageComment').value;
     this.comSer.newComment( this.posts.userIdPost, this.posts.id, newComment)
-    this.comSer.getAllComments()
+    this.post.getAllPost()
   }
 
 }

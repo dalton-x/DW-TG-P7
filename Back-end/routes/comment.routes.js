@@ -6,10 +6,10 @@ module.exports = app => {
 
   var router = require("express").Router();
 
-  router.post("/create/:id/:postId", commentCtrl.createComment);
-  router.get("/:id",auth, commentCtrl.getAllCommentOnePost);
+  router.post("/create/:id/:commentId", commentCtrl.createComment);
+  router.get("/:postId",auth, commentCtrl.getAllCommentOnePost);
   router.put("/:id",auth, commentCtrl.update);
-  router.delete("/:id",auth, commentCtrl.delete);
+  router.delete("/:commentId",auth, commentCtrl.deleteComment);
 
   app.use('/api/comment', router);
 
