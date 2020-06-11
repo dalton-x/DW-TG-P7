@@ -1,0 +1,29 @@
+<div *ngIf="comment !== undefined && comment !== null">
+  <div class="col-md-10 offset-1 rounded" style="background-color: grey;">
+    <div class="row">
+      <div class="col-md-5 offset-1">
+        <h4 class="align-middle" style="color: white;">
+          {{ comment.pseudoComment }}
+        </h4>
+      </div>
+      <div class="col-md-5">
+        <p class="text-right align-middle" style="color: white;">
+          {{ comment.commentDate | dateInterval }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-body offset-1 col-md-10 mb-3" style="background-color: #dddddd;">
+    <div class="row">
+      <div class="col-5 offset-2 mb-3"> {{ comment.comment }} </div>
+    </div>
+    <div class="col-md-2 offset-7">
+      <button class="btn btn-default" *ngIf="this.auth.isAdmin || comment.pseudoComment === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashComment(comment.pseudoComment)" title="Supprimer le commentaire"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
+    </div>
+  </div>
+
+</div>
+
+
+
+

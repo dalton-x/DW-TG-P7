@@ -29,11 +29,33 @@
     <div class="row mb-2 offset-1">
       <!-- <button class="btn btn-primary" style="color: black;" (click)="onLike(post.id)" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button> -->
       <!-- <div class="col-md-2"> -->
-        <button class="btn btn-success" style="color: black;" (click)="this.onOpenComms(post.id)" title="Afficher les commentaires">Commentaire</button>
+        <button class="btn btn-success" style="color: black;" (click)="this.onOpenComms()" title="Afficher les commentaires"> {{ post.comments.length }} Commentaire{{this.funcGlob.getPlural(post.comments.length)}}</button>
       <!-- </div> -->
       <div class="col-md-2 offset-7">
         <button class="btn btn-default" *ngIf="this.auth.isAdmin || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
       </div>
     </div>
   </div>
+
+  <!--  insertion de la création d'un post si pas de commentaires -->
+  <div *ngIf='post.comments.length === 0'>
+    <div [ngClass]="{ 'hide': !display, 'show': display }" >
+      <app-new-comment [comment]='post.comments' [posts]='post'></app-new-comment>
+    </div>
+  </div>
+
+  <!--  insertion des commentaires du post si il y a des posts -->
+  <div *ngIf='post.comments.length != 0'>
+    <div [ngClass]="{ 'hide': !display, 'show': display }" >
+      <app-new-comment [comment]='post.comments' [posts]='post'></app-new-comment>
+    </div>
+    <div [ngClass]="{ 'hide': !display, 'show': display }" >
+      <ng-container *ngFor="let comment of post.comments">
+        <app-comments [comment]='comment'></app-comments>
+      </ng-container>
+    </div>
+  </div>
+
 </div>
+
+

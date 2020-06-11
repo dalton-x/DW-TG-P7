@@ -9,4 +9,5 @@ export class Post {
   message: string;
   like: string;
   postDate: number;
+  comments: Comment[];
 }

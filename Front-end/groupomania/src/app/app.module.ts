@@ -21,6 +21,8 @@ import { UpdateUserComponent } from './profil/update-user/update-user.component'
 import { PostComponent } from './posts/new-post/new-post.component';
 import { PostsComponent } from './posts/posts/posts.component';
 import { KeywordsComponent } from './posts/keywords/keywords.component';
+import { CommentsComponent } from './posts/comments/comments.component';
+import { NewCommentComponent } from './posts/new-comment/new-comment.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { KeywordsComponent } from './posts/keywords/keywords.component';
     UpdateUserComponent,
     PostComponent,
     PostsComponent,
-    KeywordsComponent
+    KeywordsComponent,
+    CommentsComponent,
+    NewCommentComponent
   ],
   imports: [
     BrowserModule,

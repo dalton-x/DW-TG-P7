@@ -17,7 +17,12 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// Déclaration des models
 db.user = require("./user.js")(sequelize, Sequelize);
 db.post = require("./post.js")(sequelize, Sequelize);
+db.comment = require("./comment.js")(sequelize, Sequelize);
+
+db.post.hasMany(db.comment, {foreignKey: 'postId', sourceKey: 'id'});
+db.comment.belongsTo(db.post, {foreignKey: 'postId', targetKey: 'id'});
 
 module.exports = db;

@@ -25,6 +25,8 @@ app.use(bodyParser.json());
 require("./routes/user.routes")(app);
 // Route pour les posts
 require("./routes/post.routes")(app);
+// Route pour les commentaires
+require("./routes/comment.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {

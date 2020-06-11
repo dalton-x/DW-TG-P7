@@ -2,6 +2,7 @@ const db = require("../models");
 const fs = require('fs');
 // const User = db.user;
 const Post = db.post;
+const Comment = db.comment;
 
 // Sauvegarde la création d'un nouveau post
 exports.createPost = (req, res) => {
@@ -100,13 +101,16 @@ exports.getOnePost = (req, res, next) => {
 exports.getAllPost = (req, res) => {
   Post.findAll({
     order: [ 
-      ['postDate', 'DESC']    // ordre de tri 'descresendo' en fonction de la collonne date
+      ['postDate', 'DESC']          // ordre de tri 'décroissant' en fonction de la collonne date
     ],
-  }).then( // recherche de toutes les information des la BDD
-    (posts) => { // si information trouvées
-      res.status(200).json(posts); // retour des informations en objets
+    include: [
+      { model: Comment }
+    ]
+  }).then(                          // recherche de toutes les information des la BDD
+    (posts) => {                    // si information trouvées
+      res.status(200).json(posts);  // retour des informations en objets
     }
-  ).catch(  // si pas de posts trouvées
+  ).catch(                          // si pas de posts trouvées
     (error) => {
       res.status(400).json({
         error: error

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { Subscription } from 'rxjs';
 import { Post } from '../../models/Post.model';
+import { FunctionsGlobalService } from 'src/app/services/functions-global.service';
 
 @Component({
   selector: 'app-posts',
@@ -13,14 +14,17 @@ export class PostsComponent implements OnInit {
 
   postsSub: Subscription;
   public posts: Post[];
+  public display: boolean;
 
   public postId
   constructor(
     public auth: AuthService,
-    private post: PostService) {
+    private post: PostService,
+    public funcGlob: FunctionsGlobalService) {
    }
 
   ngOnInit() {
+    this.display = false
     this.postsSub = this.post.post$.subscribe(
       (posts) => {
         this.posts = posts;
@@ -30,12 +34,16 @@ export class PostsComponent implements OnInit {
     this.post.getAllPost();
   }
 
-  onLike(postId: string){
-    console.log("J'aime le post : "+postId)
-  }
+  // onLike(postId: string){
+  //   console.log("J'aime le post : "+postId)
+  // }
 
-  onOpenComms(postId){
-    console.log("Je commente le post : "+postId)
+  onOpenComms(){
+    if (this.display != true){
+      this.display = true
+    }else{
+      this.display = false
+    }
   }
 
   onTrashPost(postId){
