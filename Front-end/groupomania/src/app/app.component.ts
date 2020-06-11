@@ -37,13 +37,13 @@ export class AppComponent {
         this.isAuth = auth;
       }
     );
-    let getSession = sessionStorage.getItem('auth')
+    let getSession = localStorage.getItem('auth')
     if (JSON.parse(getSession)) {
       this.authSubscription = this.auth.onToken.subscribe(
         (auth) => {
           if (getSession == JSON.parse(getSession) || getSession == null){
             this.isOnline = false
-            sessionStorage.setItem('auth',JSON.stringify(auth))
+            localStorage.setItem('auth',JSON.stringify(auth))
             this.router.navigate(['/index'])
           }else{
             this.isOnline = true
@@ -59,7 +59,7 @@ export class AppComponent {
 
   onLogout() {
     this.auth.logout();
-    sessionStorage.setItem('auth',JSON.stringify(false))
+    localStorage.setItem('auth',JSON.stringify(false))
     this.isOnline = false
   }
 

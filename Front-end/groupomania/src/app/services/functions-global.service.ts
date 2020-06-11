@@ -10,7 +10,7 @@ export class FunctionsGlobalService {
   constructor() { }
 
   getLogin(){
-    sessionStorage.getItem('log')
+    localStorage.getItem('log')
   }
 
   getOnline(){
