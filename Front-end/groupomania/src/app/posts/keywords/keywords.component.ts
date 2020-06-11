@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from 'src/app/models/Post.model';
 import { FunctionsGlobalService } from 'src/app/services/functions-global.service';
 
@@ -22,7 +21,6 @@ export class KeywordsComponent implements OnInit {
   constructor(private post: PostService,
               public auth: AuthService,
               private formBuilder: FormBuilder,
-              public NgbModal: NgbModal,
               public funcGlob: FunctionsGlobalService
               ) { }
 

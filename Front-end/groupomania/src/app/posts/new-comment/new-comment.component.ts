@@ -30,7 +30,7 @@ export class NewCommentComponent implements OnInit {
 
   initCommentForm(){
     this.commentForm = this.formBuilder.group({
-      pseudoComment: [this.auth.getUserPseudo()],
+      pseudoComment: [this.posts.userPseudoPost],
       messageComment: ['Votre commentaire', Validators.required]
     });
   }
@@ -39,8 +39,7 @@ export class NewCommentComponent implements OnInit {
     const newComment = new Comment();
     newComment.pseudoComment = this.commentForm.get('pseudoComment').value;
     newComment.comment = this.commentForm.get('messageComment').value;
-    console.log(newComment)
-    this.comSer.newComment( this.auth.getUserId(), this.posts.id, newComment)
+    this.comSer.newComment( this.posts.userIdPost, this.posts.id, newComment)
     this.comSer.getAllComments()
   }
 

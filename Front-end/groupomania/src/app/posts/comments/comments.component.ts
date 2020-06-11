@@ -24,7 +24,7 @@ export class CommentsComponent implements OnInit {
       (response: { message: string }) => {
         console.log(response.message);
         // refresh de la liste des posts
-        this.comments.getAllComment();
+        this.comments.getAllComments();
       }
     ).catch(
       (error) => {console.log(error) }
