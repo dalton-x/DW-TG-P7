@@ -32,9 +32,11 @@ export class AppComponent {
     //   }
     // );
 
+    this.isAuth = JSON.parse(localStorage.getItem('auth'));
+
     this.authSubscription = this.auth.onToken.subscribe(
       (auth) => {
-        this.isAuth = auth;
+        this.isAuth = JSON.parse(localStorage.getItem('auth'));
       }
     );
     let getSession = localStorage.getItem('auth')
