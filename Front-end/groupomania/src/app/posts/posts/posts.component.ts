@@ -15,6 +15,7 @@ export class PostsComponent implements OnInit {
   postsSub: Subscription;
   public posts: Post[];
   public display: boolean;
+  public CommOpen: boolean;
 
   public postId
   constructor(
@@ -38,7 +39,7 @@ export class PostsComponent implements OnInit {
   //   console.log("J'aime le post : "+postId)
   // }
 
-  onOpenComms(){
+  onOpenComms(postId){
     if (this.display != true){
       this.display = true
     }else{

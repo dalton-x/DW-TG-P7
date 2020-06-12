@@ -20,12 +20,17 @@
               <div class="form-row">
                 <div class="col">
                   <label for="keywords" class="badge badge-default mt-3">Mots-clés</label>
-                  <input type="text" class="form-control" id="keywords" formControlName="keywords" title="Uniquement Majuscule/Minuscule et chiffres autorisés" pattern="[0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöùûüç' ]+)">
+                  <input type="text" class="form-control" id="keywords" formControlName="keywords" title="Uniquement Majuscule/Minuscule et chiffres autorisés" pattern="^[a-zA-Z0-9]*$">
                 </div>
                 <div class="col">
                   <label for="mood" class="badge badge-default mt-3">Votre humeur</label>
                   <select id="mood" class="form-control" name="mood" size="1"  formControlName="mood">
                     <option value="0"      > Aucune humeur particulière</option>
+                    <option value="Heureux">😁 Heureux</option>
+                    <option value="Content">😀 Content</option>
+                    <option value="XPTDR">🤣 XPTDR</option>
+                    <option value="Admiratif">🤩 Admiratif</option>
+                    <option value="Songeur">🤔 Songeur</option>
                     <option value="Fatigue">😴 Fatigué</option>
                     <option value="Triste">😥 Triste</option>
                     <option value="Malade">🤒 Malade</option>

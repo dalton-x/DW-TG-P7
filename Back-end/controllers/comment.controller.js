@@ -34,7 +34,7 @@ exports.getAllCommentOnePost = (req, res) => {
     Comment.findAll({
         where: {postId:postId},
         order: [ 
-        ['commentDate', 'CRES']    // ordre de tri 'descresendo' en fonction de la colonne date
+        ['commentDate', 'ASC']    // ordre de tri 'croissant' en fonction de la colonne date
         ],
     })
     .then(comment => {
