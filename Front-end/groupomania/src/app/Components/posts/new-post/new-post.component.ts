@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/User.model';
+import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../models/User.model';
 import { Router } from '@angular/router';
-import { Post } from '../../models/Post.model';
+import { Post } from '../../../models/Post.model';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
