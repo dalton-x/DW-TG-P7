@@ -15,3 +15,38 @@ a:hover {
   background-color: #b1b1b1;
 }
 
+.keyword{
+  position: fixed;
+  background-color: #E0E0E0;
+  border: 0.5px solid #C4C4C4;
+}
+
+
+
+/*****Inferieur a 375px*****/
+@media screen and  (max-width: 374px) {
+
+  .keyword{
+    position: relative;
+  }
+}
+
+/*****MOBILE*****/
+@media screen and (min-width: 375px) and (max-width: 767px) {
+
+  .keyword{
+    position: relative;
+  }
+
+  .col-md-11.col-12{
+    margin-left: 2%;
+  }
+}
+
+/*****TABLETTE*****/
+// @media screen and (min-width: 768px) and (max-width: 1024px) {
+
+//   .keyword{
+//     position: relative;
+//   }
+// }

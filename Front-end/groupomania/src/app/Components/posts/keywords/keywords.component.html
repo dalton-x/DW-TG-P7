@@ -1,5 +1,5 @@
-<div class="col-md-11">
-  <div class="col-md-2 mt-2 rounded" *ngIf="searchFormKeyword || searchFormUser" style="position: fixed; background-color: #E0E0E0; border: 0.5px solid #C4C4C4;">
+<div class="col-md-11 col-12">
+  <div class="keyword col-md-2 col-12 mt-2 rounded" *ngIf="searchFormKeyword || searchFormUser">
     <form [formGroup]="searchFormKeyword">
       <!-- Mot-clé -->
       <p class="rounded mt-2 text-center" style="background-color: grey; color: black;">Recherche par mots-clés :</p>

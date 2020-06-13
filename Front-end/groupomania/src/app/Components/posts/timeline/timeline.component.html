@@ -1,11 +1,11 @@
 <div class="container-fluid">
 	<div class="row m-5">
     <!-- Recherche par mots clés -->
-    <div class="col-md-10">
+    <div class="col-md-10 col-12">
       <app-keywords></app-keywords>
     </div>
     <!-- Posts -->
-    <div class="col-md-8 offset-3 mt-2">
+    <div class="col-md-8 offset-3 mt-2 col-12 offset-0">
       <div *ngFor="let post of posts">
         <app-post [post]='post'></app-post>
       </div>

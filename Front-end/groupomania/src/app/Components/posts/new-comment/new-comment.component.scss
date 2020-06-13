@@ -1,0 +1,17 @@
+/*****Inferieur a 375px*****/
+@media screen and  (max-width: 374px) {
+
+}
+
+/*****MOBILE*****/
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  form{
+    margin-left: -9%;
+    margin-right: 8%;
+  }
+}
+
+/*****TABLETTE*****/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
