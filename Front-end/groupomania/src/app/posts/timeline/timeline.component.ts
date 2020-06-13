@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Post } from 'src/app/models/Post.model';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-timeline',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelineComponent implements OnInit {
 
-  constructor() { }
+  postsSub: Subscription;
+  public posts: Post[];
+  constructor(private postServ: PostService,) {
+   }
 
-  ngOnInit(): void {
-
+  ngOnInit() {
+    this.postsSub = this.postServ.post$.subscribe(
+      (posts) => {
+        this.posts = posts;
+      },
+      (error) => {}
+    );
+    this.postServ.getAllPost();
   }
 }

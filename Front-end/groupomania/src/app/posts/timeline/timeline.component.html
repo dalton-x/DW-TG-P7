@@ -6,7 +6,9 @@
     </div>
     <!-- Posts -->
     <div class="col-md-8 offset-3 mt-2">
-      <app-posts></app-posts>
+      <div *ngFor="let post of posts">
+        <app-post [post]='post'></app-post>
+      </div>
     </div>
 	</div>
 </div>
