@@ -18,16 +18,15 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-              private auth: AuthService,
-              private app: AppComponent,
+              private authServ: AuthService,
+              private appServ: AppComponent,
               private router: Router) { }
 
   ngOnInit() {
-    console.log("this.auth.getUserIsAdmin()",this.auth.getUserIsAdmin())
-    this.app.isAdmin = this.auth.getUserIsAdmin()
-    this.app.isOnline = false
+    this.appServ.isAdmin = this.authServ.getUserIsAdmin()
+    this.appServ.isOnline = false
     localStorage.setItem('auth',JSON.stringify(false))
-    localStorage.setItem('admin',JSON.stringify(this.auth.getUserIsAdmin()))
+    localStorage.setItem('admin',JSON.stringify(this.authServ.getUserIsAdmin()))
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
@@ -37,15 +36,15 @@ export class LoginComponent implements OnInit {
   onLogin() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
-    this.auth.login(email, password).then(
+    this.authServ.login(email, password).then(
       (res: { userId: string, authToken: string}) => {
         localStorage.setItem('auth',JSON.stringify(true))
-        this.app.isOnline = true
+        this.appServ.isOnline = true
         this.router.navigate(['/timeline']);
       }
     ).catch(
       (error) => {
-        this.errorMsg = error.message;
+        this.errorMsg = error.error.error;
       }
     );
   }

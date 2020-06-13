@@ -21,11 +21,11 @@ export class NewCommentComponent implements OnInit {
   public comments: Comment;
   public user: User;
 
-  constructor(public auth: AuthService,
+  constructor(public authServ: AuthService,
               private postServ: PostService,
-              private comSer: CommentService,
+              private comServ: CommentService,
               private formBuilder: FormBuilder,
-              public postcompt: PostComponent) { }
+              public postComp: PostComponent) { }
 
   ngOnInit(): void {
     this.initCommentForm();
@@ -33,7 +33,7 @@ export class NewCommentComponent implements OnInit {
 
   initCommentForm(){
     this.commentForm = this.formBuilder.group({
-      pseudoComment: [this.auth.getUserPseudo()],
+      pseudoComment: [this.authServ.getUserPseudo()],
       messageComment: ['', Validators.required]
     });
   }
@@ -42,9 +42,9 @@ export class NewCommentComponent implements OnInit {
     const newComment = new Comment();
     newComment.pseudoComment = this.commentForm.get('pseudoComment').value;
     newComment.comment = this.commentForm.get('messageComment').value;
-    this.comSer.newComment(this.posts.id, newComment)
-    this.comSer.getAllComments(this.posts.id)
-    this.postcompt.onOpenComms();
+    this.comServ.newComment(this.posts.id, newComment)
+    this.comServ.getAllComments(this.posts.id)
+    this.postComp.onOpenComms();
     this.postServ.getAllPost();
   }
 }

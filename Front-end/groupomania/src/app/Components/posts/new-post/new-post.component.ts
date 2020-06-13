@@ -24,16 +24,16 @@ export class NewPostComponent implements OnInit {
   imageUpload: string;
 
   constructor(
-    private auth: AuthService,
-    private postService: PostService,
+    private authServ: AuthService,
+    private postServ: PostService,
     private formBuilder: FormBuilder,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.auth.getCurrentUser(this.auth.getUserId()).subscribe(
+    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(
       (response: User) => {
-        this.auth.setCurrentUser(response);
+        this.authServ.setCurrentUser(response);
         if (response !== undefined) {
           this.user = response
           this.initPostForm(response)
@@ -65,10 +65,10 @@ export class NewPostComponent implements OnInit {
     newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;
     newPost.postDate = Date.now()
 
-    this.postService.newPost(this.auth.getUserId(), newPost, newPost.imagePostUrl)
+    this.postServ.newPost(this.authServ.getUserId(), newPost, newPost.imagePostUrl)
     .then(
       (response: { message: string }) => {
-        this.postService.getAllPost()
+        this.postServ.getAllPost()
         this.router.navigate(['/timeline']);
       }
     ).catch(
@@ -77,7 +77,7 @@ export class NewPostComponent implements OnInit {
       }
     );
     this.router.navigate(['/timeline'])
-    this.postService.getAllPost()
+    this.postServ.getAllPost()
   }
 
 

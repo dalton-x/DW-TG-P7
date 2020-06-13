@@ -15,8 +15,8 @@ export class SignupComponent implements OnInit {
   errorMsg: string;
 
   constructor(private formBuilder: FormBuilder,
-              private auth: AuthService,
-              private app: AppComponent,
+              private authServ: AuthService,
+              private appComp: AppComponent,
               private router: Router) { }
 
   ngOnInit() {
@@ -35,15 +35,15 @@ export class SignupComponent implements OnInit {
     const pseudo = this.signupForm.get('pseudo').value;
     const email = this.signupForm.get('email').value;
     const password = this.signupForm.get('password').value;
-    this.auth.create(lastname, firstname, pseudo, email, password).then(
+    this.authServ.create(lastname, firstname, pseudo, email, password).then(
       (response: { message: string }) => {
         localStorage.setItem('auth',JSON.stringify(true))
-        this.app.isOnline = true
+        this.appComp.isOnline = true
         this.router.navigate(['/login']);
       }
     ).catch((error) => {
         console.error(error);
-        this.errorMsg = error.message;
+        this.errorMsg = error.error.error;
     });
   }
 

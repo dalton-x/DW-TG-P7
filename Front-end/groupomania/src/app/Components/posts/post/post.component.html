@@ -35,7 +35,7 @@
       <button class="btn btn-success" style="color: white;" (click)="this.onOpenComms()" title="Afficher les commentaires"> {{ post.comments.length }} Commentaire{{this.funcGlob.getPlural(post.comments.length)}}</button>
     <!-- </div> -->
     <div class="col-md-2 offset-7">
-      <button class="btn btn-default" *ngIf="this.auth.getUserIsAdmin() || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
+      <button class="btn btn-default" *ngIf="this.authServ.getUserIsAdmin() || post.userPseudoPost === this.authServ.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
     </div>
   </div>
 </div>

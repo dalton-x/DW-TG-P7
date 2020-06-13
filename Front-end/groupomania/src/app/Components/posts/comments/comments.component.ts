@@ -15,8 +15,8 @@ export class CommentsComponent implements OnInit {
   @Input() public comment: Comment
   @Input() public posts: Post
 
-  constructor(public auth: AuthService,
-              private post: PostService,
+  constructor(public authServ: AuthService,
+              private postServ: PostService,
               private comments: CommentService) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class CommentsComponent implements OnInit {
         console.log(response.message);
 
         // refresh de la liste des posts
-        this.post.getAllPost();
+        this.postServ.getAllPost();
         this.comments.getAllComments(this.posts.id);
       }
     ).catch(

@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
   public postId;
   public hide: boolean;
   constructor(
-              public auth: AuthService,
+              public authServ: AuthService,
               public commServ: CommentService,
               private postServ: PostService,
               public funcGlob: FunctionsGlobalService) { }

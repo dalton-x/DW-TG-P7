@@ -19,15 +19,15 @@ export class ProfilComponent implements OnInit {
   fileLastModified: number;
   filetype: string;
 
-  constructor(private auth: AuthService,
+  constructor(private authServ: AuthService,
               private formBuilder : FormBuilder,
               private router: Router
               ) {}
 
   ngOnInit(): void {
-    this.auth.getCurrentUser(this.auth.getUserId()).subscribe(
+    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(
       (response: User) => {
-        this.auth.setCurrentUser(response);
+        this.authServ.setCurrentUser(response);
         if (response !== undefined) {
           this.user = response
           this.initForm(response)
@@ -54,7 +54,7 @@ export class ProfilComponent implements OnInit {
     newUser.pseudo = this.profilForm.get('pseudo').value;
     newUser.imageUrl = this.profilForm.get('imageUrl').value;
 
-    this.auth.update(this.auth.getUserId(), newUser, newUser.imageUrl)
+    this.authServ.update(this.authServ.getUserId(), newUser, newUser.imageUrl)
     .then(
       (response: { message: string }) => {
         console.log(response.message);

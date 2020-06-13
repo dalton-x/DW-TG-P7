@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Post } from 'src/app/models/Post.model';
 import { FunctionsGlobalService } from 'src/app/services/functions-global.service';
@@ -18,8 +17,7 @@ export class KeywordsComponent implements OnInit {
   user: string;
   public posts: Post[];
 
-  constructor(private post: PostService,
-              public auth: AuthService,
+  constructor(private postServ: PostService,
               private formBuilder: FormBuilder,
               public funcGlob: FunctionsGlobalService
               ) { }
@@ -40,7 +38,7 @@ export class KeywordsComponent implements OnInit {
   onSearchKeyword(){
     this.keywords = this.searchFormKeyword.get('searchKeywords').value
     if (this.keywords){
-      this.post.getPostByKeywords(this.keywords)
+      this.postServ.getPostByKeywords(this.keywords)
       .then(
         (Posts: Post[]) => {
         this.posts = Posts;
@@ -56,7 +54,7 @@ export class KeywordsComponent implements OnInit {
   onSearchUser(){
     this.user = this.searchFormUser.get('searchUser').value
     if (this.user){
-      this.post.getPostByUser(this.user)
+      this.postServ.getPostByUser(this.user)
       .then(
         (Posts: Post[]) => {
         this.posts = Posts;

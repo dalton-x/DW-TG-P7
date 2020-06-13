@@ -27,12 +27,12 @@
 <div *ngIf="this.posts && this.posts.length > 0" class="offset-4 resultResearch rounded pb-2 pr-3 pl-3">
   <h3 class="text-center" style="color: #851702;">Résultat de votre recherche</h3>
   <div *ngFor="let post of posts">
-    <div (click)= 'scrollOnPost(post.id)'>
+    <div (click)= 'scrollOnPost(post.id)' title="Cliquer pour rejoindre le post">
       <div class="card mb-3 col-md-12 pl-0 pr-0" style="background-color: #e0e0e0;">
         <div class="card-header" style="background-color: grey;">
           <div class="row">
             <div class="col-md-6">
-              <h4 class="align-middle" style="color: black;">
+              <h4 class="align-middle text-capitalize" style="color: black;">
                 {{ post.userPseudoPost }}
               </h4>
             </div>
