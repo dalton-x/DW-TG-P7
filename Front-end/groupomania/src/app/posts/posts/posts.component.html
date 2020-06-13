@@ -1,55 +1,5 @@
 <div *ngFor="let post of posts">
-  <div id="post_{{post.id}}" class="card mb-3" style="background-color: #e0e0e0;">
-    <div class="card-header" style="background-color: grey;">
-      <div class="row">
-        <div class="col-md-6">
-          <h4 class="align-middle" style="color: white;">
-            {{ post.userPseudoPost }}
-          </h4>
-        </div>
-        <div class="col-md-6">
-          <p class="text-right align-middle" style="color: white;">
-            {{ post.postDate | dateInterval}}
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title text-center mb-3"> {{ post.title }} </h5>
-      <div class="row">
-        <div class="col-5 offset-1 mb-3"> {{ post.message }} </div>
-        <div class="col-md-4 offset-1">
-          <img class="img-fluid mb-3 ml-5" [src]="post.imagePostUrl" *ngIf="post.imagePostUrl" style="max-width: 340px; max-height: 340px; width:90%; height: 90%;" alt="La photo du post">
-        </div>
-      </div>
-      <div class="col-md-5 offset-5" *ngIf="post.mood != '0'">
-        <div>Votre humeur : {{ post.mood }} </div>
-      </div>
-    </div>
-    <div class="row mb-2 offset-1">
-      <!-- <button class="btn btn-primary" style="color: black;" (click)="onLike(post.id)" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button> -->
-      <!-- <div class="col-md-2"> -->
-        <button class="btn btn-success" style="color: black;" (click)="this.onOpenComms(post.id)" title="Afficher les commentaires"> {{ post.comments.length }} Commentaire{{this.funcGlob.getPlural(post.comments.length)}}</button>
-      <!-- </div> -->
-      <div class="col-md-2 offset-7">
-        <button class="btn btn-default" *ngIf="this.auth.isAdmin || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
-      </div>
-    </div>
-  </div>
-
-  <!--  insertion des commentaires du post si il y a des posts -->
-  <div *ngIf="">
-    {{post.id}}
-  </div>
-    <div [ngClass]="{ 'hide': !display, 'show': display }" >
-      <ng-container *ngFor="let comment of post.comments">
-        <app-comments [comment]='comment'  [posts]='post'></app-comments>
-      </ng-container>
-      <div [ngClass]="{ 'hide': !display, 'show': display }" >
-        <app-new-comment [comment]='post.comments' [posts]='post'></app-new-comment>
-      </div>
-    </div>
-
+  <app-post [post]='post'></app-post>
 </div>
 
 

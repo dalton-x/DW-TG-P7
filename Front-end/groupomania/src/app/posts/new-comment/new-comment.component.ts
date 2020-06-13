@@ -5,6 +5,7 @@ import { Post } from 'src/app/models/Post.model';
 import { Comment } from 'src/app/models/Comment.model';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
+import { User } from 'src/app/models/User.model';
 
 @Component({
   selector: 'app-new-comment',
@@ -16,7 +17,8 @@ export class NewCommentComponent implements OnInit {
   @Input() public comment: Comment
   @Input() public posts: Post
   commentForm: FormGroup;
-  public comments: Comment
+  public comments: Comment;
+  public user: User;
 
   constructor(public auth: AuthService,
               private post: PostService,
@@ -24,14 +26,14 @@ export class NewCommentComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.initCommentForm()
-    this.comSer.getAllComments(this.posts.id)
+    this.initCommentForm();
+    // this.comSer.getAllComments(this.posts.id);
   }
 
   initCommentForm(){
     this.commentForm = this.formBuilder.group({
-      pseudoComment: [this.posts.userPseudoPost],
-      messageComment: ['Votre commentaire', Validators.required]
+      pseudoComment: [this.auth.getUserPseudo()],
+      messageComment: ['', Validators.required]
     });
   }
 
@@ -39,7 +41,7 @@ export class NewCommentComponent implements OnInit {
     const newComment = new Comment();
     newComment.pseudoComment = this.commentForm.get('pseudoComment').value;
     newComment.comment = this.commentForm.get('messageComment').value;
-    this.comSer.newComment( this.posts.userIdPost, this.posts.id, newComment)
+    this.comSer.newComment(this.posts.id, newComment)
     this.post.getAllPost()
   }
 

@@ -23,7 +23,7 @@ export class FunctionsGlobalService {
 
   // ajout d'un "s" si num > 1
   getPlural(num) {
-    if (num < 1) {
+    if (num < 2) {
         return ""
     } else {
         return "s"

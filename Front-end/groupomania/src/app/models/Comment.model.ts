@@ -3,4 +3,5 @@ export class Comment {
   pseudoComment: string;
   comment: string;
   commentDate: number;
+  postId: string;
 }

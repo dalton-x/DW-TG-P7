@@ -13,10 +13,9 @@ export class CommentService {
               ) { }
 
 
-  newComment(id: string, postId: string, commentData : Object) {
-    console.log("id,commentData",id,commentData)
+  newComment(postId: string, commentData : Object) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/api/comment/create/'+id+'/'+postId, commentData).subscribe(
+      this.http.post('http://localhost:3000/api/comment/create/'+postId, commentData).subscribe(
         (response: { message: string }) => {
           resolve(response);
         },
@@ -31,7 +30,7 @@ export class CommentService {
   getAllComments(postId: string){
     this.http.get('http://localhost:3000/api/comment/'+postId).subscribe(
       (comment: Comment[]) => {
-          this.comment$.next(comment);
+        this.comment$.next(comment);
       },
       (error) => {
         this.comment$.next([]);

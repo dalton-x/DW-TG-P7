@@ -18,11 +18,13 @@ import { ProfilComponent } from './profil/profil.component';
 import { TimelineComponent } from './posts/timeline/timeline.component';
 import { AuthService } from './services/auth.service';
 import { UpdateUserComponent } from './profil/update-user/update-user.component';
-import { PostComponent } from './posts/new-post/new-post.component';
+import { NewPostComponent } from './posts/new-post/new-post.component';
 import { PostsComponent } from './posts/posts/posts.component';
 import { KeywordsComponent } from './posts/keywords/keywords.component';
 import { CommentsComponent } from './posts/comments/comments.component';
 import { NewCommentComponent } from './posts/new-comment/new-comment.component';
+import { CommonModule } from '@angular/common';
+import { PostComponent } from './posts/post/post.component';
 
 @NgModule({
   declarations: [
@@ -36,18 +38,20 @@ import { NewCommentComponent } from './posts/new-comment/new-comment.component';
     ProfilComponent,
     TimelineComponent,
     UpdateUserComponent,
-    PostComponent,
+    NewPostComponent,
     PostsComponent,
     KeywordsComponent,
     CommentsComponent,
-    NewCommentComponent
+    NewCommentComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    DateIntervalModule
+    DateIntervalModule,
+    CommonModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

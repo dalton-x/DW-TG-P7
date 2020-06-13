@@ -7,11 +7,11 @@ import { Post } from '../../models/Post.model';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
-  selector: 'app-post',
+  selector: 'app-Newpost',
   templateUrl: './new-post.component.html',
   styleUrls: ['./new-post.component.scss']
 })
-export class PostComponent implements OnInit {
+export class NewPostComponent implements OnInit {
 
   postForm: FormGroup;
   user: User;

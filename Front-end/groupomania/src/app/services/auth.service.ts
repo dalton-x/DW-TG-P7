@@ -40,7 +40,11 @@ export class AuthService {
     return this.lastname;
   }
   getUserPseudo() {
-    return this.pseudo;
+    if (this.pseudo){
+      return this.pseudo;
+    }else{
+      return localStorage.getItem('pseudo')
+    }
   }
   getUserImageUrl() {
     return this.imageUrl;
@@ -107,6 +111,7 @@ export class AuthService {
             this.isAdmin = response.isAdmin;
             localStorage.setItem('userId',this.userId);
             localStorage.setItem('token',this.authToken);
+            localStorage.setItem('pseudo',this.pseudo)
             this.onToken.next(true);
             resolve(
               this.isOnline = true
