@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMsg: string;
   user: User
-  isAdmin: Boolean = this.auth.getUserIsAdmin()
 
 
   constructor(private formBuilder: FormBuilder,
@@ -24,8 +23,11 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    console.log("this.auth.getUserIsAdmin()",this.auth.getUserIsAdmin())
+    this.app.isAdmin = this.auth.getUserIsAdmin()
     this.app.isOnline = false
     localStorage.setItem('auth',JSON.stringify(false))
+    localStorage.setItem('admin',JSON.stringify(this.auth.getUserIsAdmin()))
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]

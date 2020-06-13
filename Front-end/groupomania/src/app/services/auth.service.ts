@@ -21,7 +21,7 @@ export class AuthService {
   private authToken: string;
 
 
-  public isAdmin: Boolean = false;
+  public isAdmin: boolean;
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -57,7 +57,11 @@ export class AuthService {
     }
   }
   getUserIsAdmin() {
-    return this.isAdmin;
+    if (this.isAdmin){
+      return this.isAdmin;
+    }else{
+      return JSON.parse(localStorage.getItem('admin'))
+    }
   }
 
   setCurrentUser(user: User) {
@@ -112,6 +116,7 @@ export class AuthService {
             localStorage.setItem('userId',this.userId);
             localStorage.setItem('token',this.authToken);
             localStorage.setItem('pseudo',this.pseudo)
+            localStorage.setItem('admin',JSON.stringify(this.isAdmin))
             this.onToken.next(true);
             resolve(
               this.isOnline = true

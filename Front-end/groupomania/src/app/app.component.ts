@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FunctionsGlobalService } from './services/functions-global.service';
 import { AuthService } from './services/auth.service';
-import { Subscription} from 'rxjs';
+import { Subscription, interval} from 'rxjs';
 import 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-root',
@@ -14,25 +15,27 @@ export class AppComponent {
 
   isAuth: boolean;
   isOnline: boolean;
-  isAdmin: boolean;
+  isAdmin: Boolean;
   authSubscription: Subscription;
 
   private updateSubscription: Subscription;
 
   constructor(public auth: AuthService,
-              private router: Router
+              private router: Router,
+              private post: PostService
   ) { }
 
   ngOnInit() {
 
     //refresh auto des posts toutes les 10 minutes (600000)
-    // this.updateSubscription = interval(10000).subscribe(
-    //   (val) => {
-    //     this.post.getAllPost();
-    //   }
-    // );
+    this.updateSubscription = interval(10000).subscribe(
+      (val) => {
+        this.post.getAllPost();
+      }
+    );
 
     this.isAuth = JSON.parse(localStorage.getItem('auth'));
+    this.isAdmin = JSON.parse(localStorage.getItem('admin'))
 
     this.authSubscription = this.auth.onToken.subscribe(
       (auth) => {
@@ -46,6 +49,7 @@ export class AppComponent {
           if (getSession == JSON.parse(getSession) || getSession == null){
             this.isOnline = false
             localStorage.setItem('auth',JSON.stringify(auth))
+            // localStorage.setItem('admin',JSON.stringify(this.auth.getUserIsAdmin()))
             this.router.navigate(['/index'])
           }else{
             this.isOnline = true
