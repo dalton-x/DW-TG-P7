@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { Post } from 'src/app/models/Post.model';
 import { PostService } from 'src/app/services/post.service';
-import { PostsComponent } from '../posts/posts.component';
 
 @Component({
   selector: 'app-comments',
@@ -18,8 +17,7 @@ export class CommentsComponent implements OnInit {
 
   constructor(public auth: AuthService,
               private post: PostService,
-              private comments: CommentService,
-              public appPosts: PostsComponent) { }
+              private comments: CommentService) { }
 
   ngOnInit(): void {
   }

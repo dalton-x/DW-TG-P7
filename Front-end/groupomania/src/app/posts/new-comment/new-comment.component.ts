@@ -6,6 +6,7 @@ import { Comment } from 'src/app/models/Comment.model';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/User.model';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-new-comment',
@@ -21,13 +22,13 @@ export class NewCommentComponent implements OnInit {
   public user: User;
 
   constructor(public auth: AuthService,
-              private post: PostService,
+              private postServ: PostService,
               private comSer: CommentService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              public postcompt: PostComponent) { }
 
   ngOnInit(): void {
     this.initCommentForm();
-    // this.comSer.getAllComments(this.posts.id);
   }
 
   initCommentForm(){
@@ -42,7 +43,8 @@ export class NewCommentComponent implements OnInit {
     newComment.pseudoComment = this.commentForm.get('pseudoComment').value;
     newComment.comment = this.commentForm.get('messageComment').value;
     this.comSer.newComment(this.posts.id, newComment)
-    this.post.getAllPost()
+    this.comSer.getAllComments(this.posts.id)
+    this.postServ.getAllPost();
   }
 
 }

@@ -103,8 +103,8 @@ exports.getAllPost = (req, res) => {
     order: [ 
       ['postDate', 'DESC']          // ordre de tri 'décroissant' en fonction de la collonne date
     ],
-    include: [
-      { model: Comment }
+    include: [                      
+      { model: Comment }            // on lie la table des commentaires dans la recherche pour affiché les commentaires liés aux posts trouvés
     ]
   }).then(                          // recherche de toutes les information des la BDD
     (posts) => {                    // si information trouvées
@@ -128,18 +128,50 @@ exports.updatePost = (req, res, next) => {
 exports.deletePost = (req, res) => {
   Post.findOne( { where: { id: req.params.postId } })  
   .then(post => {
-    if (post.dataValues.imagePostUrl){
-      const filename = post.dataValues.imagePostUrl.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
-        Post.destroy({ where: { id: req.params.postId } })
-        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-        .catch(error => res.status(400).json({ error }));
+    if (post.dataValues.imagePostUrl){                                      // vérification d'un contenu multimedia
+      const filename = post.dataValues.imagePostUrl.split('/images/')[1];   // recheche du contenu multimedia
+      fs.unlink(`images/${filename}`, () => {                               // supression du contenu multimedia
+        Comment.findAll({ where: { postId: req.params.postId }              // recherche des commentaires lié au post
+        })
+        .then(comments => {        
+          if(comments.length === 0) {                                       // le post ne contient pas de commentaires
+            // on efface le post
+            Post.destroy({ where: { id: req.params.postId} })               // suppression du post
+            .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+            .catch(error => res.status(400).json({ error }));
+          }else{                                                            // le post contient des commentaires
+            Comment.destroy({where:                                         // suppression des commentaires associés
+              { postId: comments.map(
+              comment => { return comment.postId }) 
+              }}
+            )
+            Post.destroy({ where: { id: req.params.postId } })              // suppression du post
+            .then(() => res.status(200).json({ message: 'Post supprimé avec ses commentaires!' }))
+            .catch(error => res.status(400).json({ error }));
+          };
+        });
       });
         
-    }else{
-      Post.destroy({ where: { id: req.params.postId } })
-        .then(() => res.status(200).json({ message: 'Post supprimé !' }))
-        .catch(error => res.status(400).json({ error }));
+    }else{                                                                  //pas d'image
+      Comment.findAll({ where: { postId: req.params.postId }                // recherche des commentaires lié au post
+      })
+      .then(comments => {        
+        if(comments.length === 0) {                                         // le post ne contient pas de commentaires
+          // on efface le post
+          Post.destroy({ where: { id: req.params.postId} })                 // suppression du post
+          .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+          .catch(error => res.status(400).json({ error }));
+        }else{                                                              // le post contient des commentaires
+          Comment.destroy({where:                                           // suppression des commentaires associés
+            { postId: comments.map(
+            comment => { return comment.postId }) 
+            }}
+          )
+          Post.destroy({ where: { id: req.params.postId } })                // suppression du post
+          .then(() => res.status(200).json({ message: 'Post supprimé avec ses commentaires!' }))
+          .catch(error => res.status(400).json({ error }));
+        };
+      });
     }
   })
   .catch(error => res.status(500).json({ error }));  

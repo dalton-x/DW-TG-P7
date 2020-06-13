@@ -27,13 +27,6 @@ export class AppComponent {
 
   ngOnInit() {
 
-    //refresh auto des posts toutes les 10 minutes (600000)
-    this.updateSubscription = interval(10000).subscribe(
-      (val) => {
-        this.post.getAllPost();
-      }
-    );
-
     this.isAuth = JSON.parse(localStorage.getItem('auth'));
     this.isAdmin = JSON.parse(localStorage.getItem('admin'))
 

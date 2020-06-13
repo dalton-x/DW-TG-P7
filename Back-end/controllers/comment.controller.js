@@ -50,7 +50,6 @@ exports.update = (req, res, next) => {
 // Supprime un commentaire en fonction de son id
 exports.deleteComment = (req, res) => {
     const reqParams = req.params
-    console.log("reqParams",reqParams)
     Comment.findOne( { where: { id: req.params.commentId } })  
     .then(comment => {
         Comment.destroy({ where: { id: req.params.commentId } })
