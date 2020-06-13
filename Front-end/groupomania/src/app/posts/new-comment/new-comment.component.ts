@@ -44,9 +44,7 @@ export class NewCommentComponent implements OnInit {
     newComment.comment = this.commentForm.get('messageComment').value;
     this.comSer.newComment(this.posts.id, newComment)
     this.comSer.getAllComments(this.posts.id)
+    this.postcompt.onOpenComms();
     this.postServ.getAllPost();
   }
-
 }
-
-
