@@ -2,12 +2,12 @@
   <div class="card-header" style="background-color: grey;">
     <div class="row">
       <div class="col-md-6">
-        <h4 class="align-middle text-capitalize" style="color: white;">
+        <h4 class="align-middle text-capitalize" style="color: black;">
           <u>{{post.userPseudoPost}}</u>
         </h4>
       </div>
       <div class="col-md-6">
-        <p class="text-right align-middle" style="color: white;">
+        <p class="text-right align-middle" style="color: black;">
           {{ post.postDate | dateInterval}}
         </p>
       </div>
@@ -25,14 +25,14 @@
           </div>
         </ng-container>
     </div>
-    <div class="col-md-5 offset-7 " *ngIf="post.mood != '0'">
+    <div class="col-md-5 offset-1 ml-5" *ngIf="post.mood != '0'">
       <div><strong class="text-capitalize"><u>{{post.userPseudoPost}}</u></strong> est {{ post.mood }} </div>
     </div>
   </div>
   <div class="row mb-2 offset-1">
     <!-- <button class="btn btn-primary" style="color: black;" (click)="onLike(post.id)" title="Dire que j'aime la publication"><i style="color: white; font-size: 1.4em;" class="fa fa-thumbs-up"></i></button> -->
     <!-- <div class="col-md-2"> -->
-      <button class="btn btn-success" style="color: black;" (click)="this.onOpenComms()" title="Afficher les commentaires"> {{ post.comments.length }} Commentaire{{this.funcGlob.getPlural(post.comments.length)}}</button>
+      <button class="btn btn-success" style="color: white;" (click)="this.onOpenComms()" title="Afficher les commentaires"> {{ post.comments.length }} Commentaire{{this.funcGlob.getPlural(post.comments.length)}}</button>
     <!-- </div> -->
     <div class="col-md-2 offset-7">
       <button class="btn btn-default" *ngIf="this.auth.getUserIsAdmin() || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>

@@ -13,3 +13,17 @@
 //     line-height: 40px;
 //     border-radius: 6px;
 // }
+
+
+// correction des couleur des bouton vert pour le WCAG
+.btn-success {
+  color:#fff;
+  background-color:#155725;
+  border-color:#155725
+}
+
+.btn-success.disabled, .btn-success:disabled {
+  color:#fff;
+  background-color:#155725;
+  border-color:#155725
+}

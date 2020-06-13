@@ -14,7 +14,7 @@
               <img alt="Image du post" [src]="imageUpload" *ngIf="imageUpload" class="rounded img-fluid mx-auto d-block form-control">
               <input type="file" accept="image/*" #imagePostInput (change)="onFileUpload($event)">
               <button class="btn-default image btn btn-danger mx-auto d-block primary" (click)="imagePostInput.click()" *ngIf="!imageUpload">Poster une image</button>
-              <button class="btn-default image btn btn-success mx-auto d-block primary" (click)="imagePostInput.click()" *ngIf="imageUpload">Changer l'image</button>
+              <button class="btn-default image btn btn-success mx-auto d-block primary mt-3" (click)="imagePostInput.click()" *ngIf="imageUpload">Changer l'image</button>
               <input class="image" type="file" accept="image/*" #imagePostInput (change)="onFileUpload($event)">
               <br>
               <div class="form-row">
