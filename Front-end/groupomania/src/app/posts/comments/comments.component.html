@@ -15,10 +15,10 @@
   </div>
   <div class="card-body offset-1 col-md-10 mb-3" style="background-color: #dddddd;">
     <div class="row">
-      <div class="col-5 offset-2 mb-3"> {{ comment.comment }} </div>
-    </div>
-    <div class="col-md-2 offset-7">
-      <button class="btn btn-default" *ngIf="this.auth.isAdmin || comment.pseudoComment === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashComment()" title="Supprimer le commentaire"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
+      <div class="col-6 offset-1 mb-3"> {{ comment.comment }} </div>
+    <!-- </div>
+    <div class="col-md-2 offset-7"> -->
+      <button class="btn btn-default col-md-1 offset-3" *ngIf="this.auth.isAdmin || comment.pseudoComment === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashComment()" title="Supprimer le commentaire"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
     </div>
   </div>
 
