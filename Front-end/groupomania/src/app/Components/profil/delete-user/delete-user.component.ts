@@ -17,32 +17,33 @@ export class DeleteUserComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private auth: AuthService,
-      private app: AppComponent
+      private authServ: AuthService,
+      private appComp: AppComponent
   ) { }
 
   ngOnInit(): void {
     const start = 3
     const counter = Observable.interval(1000);
+    this.authServ.delete(this.authServ.getUserId())
     counter.subscribe(
       (value) => {
         this.secondes = (value - start)*-1;
         if (this.secondes < 0){
-          this.auth.logout();
+          this.authServ.logout();
           localStorage.setItem('auth',JSON.stringify(false))
-          this.auth.delete(this.auth.getUserId())
-          this.app.isOnline = false
+          this.appComp.isOnline = false
           this.router.navigate(['/index']);
-          this.counter.unsubscribe();
         }
       },
       (error) => {
         console.log(error);
+        this.counter.unsubscribe();
       },
       () => {
         console.log('Observable complete!');
       }
     );
+    this.counter.unsubscribe();
   }
 
 }

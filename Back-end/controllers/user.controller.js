@@ -19,9 +19,9 @@ exports.create = (req, res) => {
 
   User.findOne({ where: {email: req.body.email} }) // recherche de l'utilisateur en fonction de son email
   .then(user => {
-    // if (user) {    // Email déja en BDD
-    //   return res.status(401).json({ error: 'Utilisateur déja existant' });
-    // }
+    if (user) {    // Email déja en BDD
+      return res.status(401).json({ error: 'Email déjà enregistrée' });
+    }
 
     // Haschage du mot de passe
     bcrypt.hash(req.body.password, 10)
