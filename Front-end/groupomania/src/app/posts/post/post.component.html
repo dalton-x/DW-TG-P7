@@ -18,7 +18,9 @@
     <div class="row">
       <div class="col-5 offset-1 mb-3"> {{ post.message }} </div>
       <div class="col-md-4 offset-1">
-        <img class="img-fluid mb-3 ml-5" [src]="post.imagePostUrl" *ngIf="post.imagePostUrl" style="max-width: 340px; max-height: 340px; width:90%; height: 90%;" alt="La photo du post">
+        <a href='{{post.imagePostUrl}}'>
+          <img class="img-fluid mb-3 ml-5" [src]="post.imagePostUrl" *ngIf="post.imagePostUrl" style="max-width: 340px; max-height: 340px; width:90%; height: 90%;" alt="La photo du post" title="Cliquer pour voir en plus grand">
+        </a>
       </div>
     </div>
     <div class="col-md-5 offset-5" *ngIf="post.mood != '0'">
@@ -31,7 +33,7 @@
       <button class="btn btn-success" style="color: black;" (click)="this.onOpenComms()" title="Afficher les commentaires"> {{ post.comments.length }} Commentaire{{this.funcGlob.getPlural(post.comments.length)}}</button>
     <!-- </div> -->
     <div class="col-md-2 offset-7">
-      <button class="btn btn-default" *ngIf="this.auth.isAdmin || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
+      <button class="btn btn-default" *ngIf="this.auth.getUserIsAdmin() || post.userPseudoPost === this.auth.getUserPseudo()" style="color: black;" (click)="this.onTrashPost(post.id)" title="Supprimer le post"><i style="color: red; font-size: 1.4em;" class="fa fa-trash fa-sm"></i></button>
     </div>
   </div>
 </div>
