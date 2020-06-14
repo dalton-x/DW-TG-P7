@@ -79,8 +79,10 @@ export class ProfilComponent implements OnInit {
   }
 
   onDelete(){
-    if (confirm("Etes vous sur de vouloir supprimé votre profil \n\n\n cette acction est IRREVERSIBLE")){
+    if (confirm("Etes vous sur de vouloir supprimé votre profil \n\n\n cette action est IRREVERSIBLE")){
       this.router.navigate(['/deleteUser']);
+    }else{
+      this.router.navigate(['/profil']);
     }
   }
 }

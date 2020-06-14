@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
+import 'rxjs/add/observable/interval';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppComponent } from 'src/app/app.component';
@@ -9,11 +10,11 @@ import { AppComponent } from 'src/app/app.component';
   templateUrl: './delete-user.component.html',
   styleUrls: ['./delete-user.component.scss']
 })
-export class DeleteUserComponent implements OnInit {
+export class DeleteUserComponent implements OnInit, OnDestroy {
 
   secondes: number;
   start: number;
-  counter: Subscription;
+  counterSubscription: Subscription;
 
   constructor(
       private router: Router,
@@ -21,15 +22,17 @@ export class DeleteUserComponent implements OnInit {
       private appComp: AppComponent
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log("SUPPR")
     const start = 3
     const counter = Observable.interval(1000);
     this.authServ.delete(this.authServ.getUserId())
-    counter.subscribe(
+    this.counterSubscription = counter.subscribe(
       (value) => {
         this.secondes = (value - start)*-1;
         if (this.secondes < 0){
           this.authServ.logout();
+          localStorage.clear()
           localStorage.setItem('auth',JSON.stringify(false))
           this.appComp.isOnline = false
           this.router.navigate(['/index']);
@@ -37,13 +40,15 @@ export class DeleteUserComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.counter.unsubscribe();
       },
       () => {
         console.log('Observable complete!');
       }
     );
-    this.counter.unsubscribe();
+  }
+
+  ngOnDestroy() {
+    this.counterSubscription.unsubscribe();
   }
 
 }

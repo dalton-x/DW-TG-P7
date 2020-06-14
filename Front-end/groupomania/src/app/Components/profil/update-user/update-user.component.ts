@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import 'rxjs/add/observable/interval';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,25 +8,25 @@ import { Router } from '@angular/router';
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.scss']
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit, OnDestroy {
 
   secondes: number;
   start: number;
-  counter: Subscription;
+  counterSubscription: Subscription;
 
   constructor(
       private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     const start = 3
     const counter = Observable.interval(1000);
-    counter.subscribe(
+    this.counterSubscription = counter.subscribe(
       (value) => {
         this.secondes = (value - start)*-1;
         if (this.secondes < 0){
           this.router.navigate(['/profil']);
-          this.counter.unsubscribe();
+          this.counterSubscription.unsubscribe();
         }
       },
       (error) => {
@@ -35,5 +36,9 @@ export class UpdateUserComponent implements OnInit {
         console.log('Observable complete!');
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.counterSubscription.unsubscribe();
   }
 }

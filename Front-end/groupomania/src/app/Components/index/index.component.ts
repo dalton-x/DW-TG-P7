@@ -10,6 +10,7 @@ export class IndexComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    localStorage.setItem('admin','false')
   }
 
 }

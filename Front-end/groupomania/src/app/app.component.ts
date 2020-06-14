@@ -13,9 +13,9 @@ import { PostService } from './services/post.service';
 })
 export class AppComponent {
 
-  isAuth: boolean;
-  isOnline: boolean;
-  isAdmin: Boolean;
+  isAuth: boolean = false;
+  isOnline: boolean = false;
+  isAdmin: Boolean = false;
   authSubscription: Subscription;
 
   private updateSubscription: Subscription;
