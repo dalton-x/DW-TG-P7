@@ -15,15 +15,15 @@
 // }
 
 
-// correction des couleur des bouton vert pour le WCAG
+// correction des couleurs des boutons vert pour le WCAG
 .btn-success {
-  color:#fff;
-  background-color:#155725;
-  border-color:#155725
+  color:#fff !important;
+  background-color:#155725 !important;
+  border-color:#155725 !important;
 }
 
 .btn-success.disabled, .btn-success:disabled {
-  color:#fff;
-  background-color:#155725;
-  border-color:#155725
+  color:#fff !important;
+  background-color:#155725 !important;
+  border-color:#155725 !important;
 }

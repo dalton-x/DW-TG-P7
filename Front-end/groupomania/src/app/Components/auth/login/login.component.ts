@@ -14,22 +14,22 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errorMsg: string;
-  user: User
+  user: User;
 
 
   constructor(private formBuilder: FormBuilder,
               private authServ: AuthService,
-              private appServ: AppComponent,
+              private appComp: AppComponent,
               private router: Router) { }
 
   ngOnInit() {
-    this.appServ.isAdmin = this.authServ.getUserIsAdmin()
-    this.appServ.isOnline = false
-    localStorage.setItem('auth',JSON.stringify(false))
+    this.appComp.isAdmin = this.authServ.getUserIsAdmin();
+    this.appComp.isOnline = false;
+    localStorage.setItem('auth',JSON.stringify(false));
     if (this.authServ.getUserIsAdmin() === null){
-      localStorage.setItem('admin','false')
+      localStorage.setItem('admin','false');
     }else{
-      localStorage.setItem('admin',JSON.stringify(this.authServ.getUserIsAdmin()))
+      localStorage.setItem('admin',JSON.stringify(this.authServ.getUserIsAdmin()));
     }
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.get('password').value;
     this.authServ.login(email, password).then(
       (res: { userId: string, authToken: string}) => {
-        localStorage.setItem('auth',JSON.stringify(true))
-        this.appServ.isOnline = true
+        localStorage.setItem('auth',JSON.stringify(true));
+        this.appComp.isOnline = true;
         this.router.navigate(['/timeline']);
       }
     ).catch(

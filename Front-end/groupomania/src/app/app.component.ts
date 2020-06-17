@@ -60,6 +60,7 @@ export class AppComponent {
     this.auth.logout();
     localStorage.setItem('auth',JSON.stringify(false))
     this.isOnline = false
+    this.ngOnInit()
   }
 
   ngOnDestroy() {
