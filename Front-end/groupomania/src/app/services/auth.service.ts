@@ -57,11 +57,11 @@ export class AuthService {
     }
   }
   getUserIsAdmin() {
-    if (this.isAdmin){
+    // if (this.isAdmin){
       return this.isAdmin;
-    }else{
-      return JSON.parse(localStorage.getItem('admin'))
-    }
+    // }else{
+    //   return JSON.parse(localStorage.getItem('admin'))
+    // }
   }
 
   setCurrentUser(user: User) {

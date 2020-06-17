@@ -25,6 +25,8 @@ Modifier le fichier ``` db.config.js ``` dans le dossier ``` Back-end/config ```
      PASSWORD: "Mot de passe de connection de la base de donnée"
      DB: "Nom de la base de donnée"
 
+Pour ajouter un administrateur mettre `1` dans `isAdmin` sur la ligne de l'utilisateur concerné
+
 ### Pour la premiere installation** :
 
 * *Pour installer les packages nodeJS :*
