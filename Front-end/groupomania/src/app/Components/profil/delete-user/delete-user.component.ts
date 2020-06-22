@@ -23,7 +23,6 @@ export class DeleteUserComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log("SUPPR")
     const start = 3
     const counter = Observable.interval(1000);
     this.authServ.delete(this.authServ.getUserId())

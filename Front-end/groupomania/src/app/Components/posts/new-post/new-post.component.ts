@@ -54,30 +54,30 @@ export class NewPostComponent implements OnInit {
   }
 
   onValidatePost(){
-    alert('Etes vous sur de vouloir poster votre message')
+    if (confirm('Etes vous sur de vouloir poster votre message')){
+      const newPost = new Post();
+      newPost.title = this.postForm.get('title').value;
+      newPost.userPseudoPost = this.user.pseudo;
+      newPost.mood = this.postForm.get('mood').value;
+      newPost.keywords = this.postForm.get('keywords').value;
+      newPost.message = this.postForm.get('message').value;
+      newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;
+      newPost.postDate = Date.now()
 
-    const newPost = new Post();
-    newPost.title = this.postForm.get('title').value;
-    newPost.userPseudoPost = this.user.pseudo;
-    newPost.mood = this.postForm.get('mood').value;
-    newPost.keywords = this.postForm.get('keywords').value;
-    newPost.message = this.postForm.get('message').value;
-    newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;
-    newPost.postDate = Date.now()
-
-    this.postServ.newPost(this.authServ.getUserId(), newPost, newPost.imagePostUrl)
-    .then(
-      (response: { message: string }) => {
-        this.postServ.getAllPost()
-        this.router.navigate(['/timeline']);
-      }
-    ).catch(
-      (error) => {
-        console.error(error);
-      }
-    );
-    this.router.navigate(['/timeline'])
-    this.postServ.getAllPost()
+      this.postServ.newPost(this.authServ.getUserId(), newPost, newPost.imagePostUrl)
+      .then(
+        (response: { message: string }) => {
+          this.postServ.getAllPost()
+          this.router.navigate(['/timeline']);
+        }
+      ).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+      this.router.navigate(['/timeline'])
+      this.postServ.getAllPost()
+    }
   }
 
 

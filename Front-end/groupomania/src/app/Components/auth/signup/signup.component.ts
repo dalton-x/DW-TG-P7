@@ -38,7 +38,6 @@ export class SignupComponent implements OnInit {
     this.authServ.create(lastname, firstname, pseudo, email, password).then(
       (response: { message: string }) => {
         localStorage.setItem('auth',JSON.stringify(true))
-        this.appComp.isOnline = true
         this.router.navigate(['/login']);
       }
     ).catch((error) => {
