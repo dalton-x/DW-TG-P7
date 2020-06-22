@@ -23,7 +23,7 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
     const counter = Observable.interval(1000);
     this.counterSubscription = counter.subscribe(
       (value) => {
-        this.secondes = (value - start)*-1;
+        this.secondes = start - value;
         if (this.secondes < 0){
           this.router.navigate(['/profil']);
           this.counterSubscription.unsubscribe();

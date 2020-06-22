@@ -59,30 +59,30 @@ exports.create = (req, res) => {
 exports.logIn = (req, res) => {
   User.findOne({ where: {email: req.body.email} }) // recherche de l'utilisateur en fonction de son email
   .then(user => {
-  if (!user) {    // Utilisateur pas erregistré
-    return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-  }
-  bcrypt.compare(req.body.password, user.password)    // comparaison avec le mot de passe crypter en BDD
-    .then(valid => {
-      if (!valid) {
-          return res.status(401).json({ error: 'Mot de passe incorrect !' });
-      }
-      res.status(200).json({        
-        userId: user.id,
-        email: user.email,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        pseudo: user.pseudo,
-        isAdmin: user.isAdmin,
-        imageUrl: user.imageUrl,
-        token: jwt.sign(          //utilisisation de jsonWebToken
-          { userId: user.id },   //gestion du UserId
-          '$2b$10$hLNQnC3nMg7RQgnrDcdj9Oltl.UBmGruFCuNz2G.y33AjMgLJEJbq', // clé de cryptage
-          { expiresIn: '24h' }    // temps de validité
-        )
-      });
-    })
-    .catch(error => res.status(500).json({ error }));
+    if (!user) {    // Utilisateur pas erregistré
+      return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+    }
+    bcrypt.compare(req.body.password, user.password)    // comparaison avec le mot de passe crypter en BDD
+      .then(valid => {
+        if (!valid) {
+            return res.status(401).json({ error: 'Mot de passe incorrect !' });
+        }
+        res.status(200).json({        
+          userId: user.id,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          pseudo: user.pseudo,
+          isAdmin: user.isAdmin,
+          imageUrl: user.imageUrl,
+          token: jwt.sign(          //utilisisation de jsonWebToken
+            { userId: user.id },   //gestion du UserId
+            '$2b$10$hLNQnC3nMg7RQgnrDcdj9Oltl.UBmGruFCuNz2G.y33AjMgLJEJbq', // clé de cryptage
+            { expiresIn: '24h' }    // temps de validité
+          )
+        });
+      })
+      .catch(error => res.status(500).json({ error }));
   })
   .catch(error => res.status(500).json({ error }));
 };
@@ -182,8 +182,6 @@ exports.delete = (req, res) => {
       });
     });
   })
-  
-  
 };
   
 // Retourne tout les utilisateur en ligne
