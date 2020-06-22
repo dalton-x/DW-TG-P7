@@ -103,9 +103,8 @@ exports.getOne = (req, res, next) => {
 };
 
 // Retourne tout les utilisateurs de la base de données
-exports.getAll = (req, res) => {
-    
-};
+// exports.getAll = (req, res) => {
+// };
 
 // Met a jour les données de l'utilisateur
 exports.update = (req, res, next) => {
@@ -185,6 +184,5 @@ exports.delete = (req, res) => {
 };
   
 // Retourne tout les utilisateur en ligne
-exports.getAllOnline = (req, res) => {
-
-};
+// exports.getAllOnline = (req, res) => {
+// };

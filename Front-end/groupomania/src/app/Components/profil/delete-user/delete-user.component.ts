@@ -28,7 +28,7 @@ export class DeleteUserComponent implements OnInit, OnDestroy {
     this.authServ.delete(this.authServ.getUserId())
     this.counterSubscription = counter.subscribe(
       (value) => {
-        this.secondes = (value - start)*-1;
+        this.secondes = start - value;
         if (this.secondes < 0){
           this.authServ.logout();
           localStorage.clear()

@@ -34,7 +34,7 @@ exports.getAllCommentOnePost = (req, res) => {
     Comment.findAll({
         where: {postId:postId},
         order: [ 
-        ['commentDate', 'ASC']    // ordre de tri 'croissant' en fonction de la colonne date
+          ['commentDate', 'ASC']    // ordre de tri 'croissant' en fonction de la colonne date
         ],
     })
     .then(comment => {
@@ -43,9 +43,8 @@ exports.getAllCommentOnePost = (req, res) => {
 };
 
 // Met a jour les informations d'un commentaire
-exports.update = (req, res, next) => {
-
-};
+// exports.update = (req, res, next) => {
+// };
   
 // Supprime un commentaire en fonction de son id
 exports.deleteComment = (req, res) => {

@@ -8,7 +8,7 @@ module.exports = app => {
 
   router.post("/create/:postId", commentCtrl.createComment);
   router.get("/:postId",auth, commentCtrl.getAllCommentOnePost);
-  router.put("/:id",auth, commentCtrl.update);
+  // router.put("/:id",auth, commentCtrl.update);
   router.delete("/:commentId",auth, commentCtrl.deleteComment);
 
   app.use('/api/comment', router);

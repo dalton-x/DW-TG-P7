@@ -26,11 +26,7 @@ export class LoginComponent implements OnInit {
     this.appComp.isAdmin = this.authServ.getUserIsAdmin();
     this.appComp.isOnline = false;
     localStorage.setItem('auth',JSON.stringify(false));
-    if (this.authServ.getUserIsAdmin() === null){
-      localStorage.setItem('admin','false');
-    }else{
-      localStorage.setItem('admin',JSON.stringify(this.authServ.getUserIsAdmin()));
-    }
+    localStorage.setItem('admin','false');
     this.loginForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]

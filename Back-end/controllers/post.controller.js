@@ -93,9 +93,8 @@ exports.getPostByUser = (req, res) => {
 };
 
 // Recuperation d'un post avec son Id
-exports.getOnePost = (req, res, next) => {
-  
-};
+// exports.getOnePost = (req, res, next) => {
+// };
 
 // Retourne tout les posts de la base de données
 exports.getAllPost = (req, res) => {
@@ -120,9 +119,8 @@ exports.getAllPost = (req, res) => {
 };
 
 // Met a jour les données du post selectionné
-exports.updatePost = (req, res, next) => {
-  
-};
+// exports.updatePost = (req, res, next) => {
+// };
   
 // Supprime le post en fonction de son Id
 exports.deletePost = (req, res) => {
