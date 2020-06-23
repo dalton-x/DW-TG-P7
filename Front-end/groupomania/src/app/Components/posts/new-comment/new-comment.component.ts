@@ -31,6 +31,7 @@ export class NewCommentComponent implements OnInit {
     this.initCommentForm();
   }
 
+  // Initialisation du formulaire
   initCommentForm(){
     this.commentForm = this.formBuilder.group({
       pseudoComment: [this.authServ.getUserPseudo()],
@@ -38,6 +39,7 @@ export class NewCommentComponent implements OnInit {
     });
   }
 
+  // Validation du commentaire
   onValidateComment(){
     const newComment = new Comment();
     newComment.pseudoComment = this.commentForm.get('pseudoComment').value;

@@ -16,12 +16,13 @@ export class TimelineComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.postsSub = this.postServ.post$.subscribe(
+    this.postsSub = this.postServ.post$.subscribe(      // Récupérations des posts par la base de données
       (posts) => {
         this.posts = posts;
       },
       (error) => {}
     );
+    // Refresh des posts
     this.postServ.getAllPost();
   }
 }

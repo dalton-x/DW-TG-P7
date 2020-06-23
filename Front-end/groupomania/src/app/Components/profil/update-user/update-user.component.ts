@@ -24,9 +24,9 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
     this.counterSubscription = counter.subscribe(
       (value) => {
         this.secondes = start - value;
-        if (this.secondes < 0){
-          this.router.navigate(['/profil']);
-          this.counterSubscription.unsubscribe();
+        if (this.secondes < 0){                               // Mise en place de compte a rebours
+          this.router.navigate(['/profil']);                  // Renvoie vers la page profil
+          this.counterSubscription.unsubscribe();             // Arret de la subcription
         }
       },
       (error) => {
@@ -37,7 +37,8 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  
+  // Nettoyage des subscriptions
   ngOnDestroy() {
     this.counterSubscription.unsubscribe();
   }

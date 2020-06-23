@@ -26,15 +26,18 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-
+    // Récupération des information dans le localStorage
     this.isAuth = JSON.parse(localStorage.getItem('auth'));
     this.isAdmin = JSON.parse(localStorage.getItem('admin'))
 
+    // Subcription pour le tooken
     this.authSubscription = this.auth.onToken.subscribe(
       (auth) => {
         this.isAuth = JSON.parse(localStorage.getItem('auth'));
       }
     );
+
+    // Vérification de la connection et du token pour acces aux pages authentifiées
     let getSession = localStorage.getItem('auth')
     if (JSON.parse(getSession)) {
       this.authSubscription = this.auth.onToken.subscribe(
@@ -42,7 +45,6 @@ export class AppComponent {
           if (getSession == JSON.parse(getSession) || getSession == null){
             this.isOnline = false
             localStorage.setItem('auth',JSON.stringify(auth))
-            // localStorage.setItem('admin',JSON.stringify(this.auth.getUserIsAdmin()))
             this.router.navigate(['/index'])
           }else{
             this.isOnline = true
@@ -56,6 +58,7 @@ export class AppComponent {
 
   }
 
+  // Boutton de déconnection
   onLogout() {
     this.auth.logout();
     localStorage.setItem('auth',JSON.stringify(false))
@@ -63,6 +66,7 @@ export class AppComponent {
     this.ngOnInit()
   }
 
+  // Suppression des subscribe
   ngOnDestroy() {
     this.authSubscription.unsubscribe();
     this.updateSubscription.unsubscribe();

@@ -43,6 +43,7 @@
 
 <!--  insertion des commentaires du post si il y a des posts -->
 <div [ngClass]="{ 'hide': !display, 'show': display }" >
+  <!-- Ajout de la possibilitée de commenté si plus de 3 commentaires -->
   <app-new-comment *ngIf="post.comments.length > 3" [comment]='post.comments' [posts]='post'></app-new-comment>
   <ng-container *ngFor="let comment of post.comments">
     <app-comments [comment]='comment'  [posts]='post'></app-comments>

@@ -17,19 +17,21 @@ export class CommentsComponent implements OnInit {
 
   constructor(public authServ: AuthService,
               private postServ: PostService,
-              private comments: CommentService) { }
+              private commentsServ: CommentService) { }
 
   ngOnInit(): void {
   }
 
+  // Suppression du commentaire
   onTrashComment(){
-    this.comments.deleteComment(this.comment.id).then(
+    this.commentsServ.deleteComment(this.comment.id).then(
       (response: { message: string }) => {
         console.log(response.message);
 
         // refresh de la liste des posts
         this.postServ.getAllPost();
-        this.comments.getAllComments(this.posts.id);
+        // Refresh de la liste des commentaires du post
+        this.commentsServ.getAllComments(this.posts.id);
       }
     ).catch(
       (error) => {console.log(error) }

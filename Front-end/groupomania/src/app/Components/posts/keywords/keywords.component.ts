@@ -26,6 +26,7 @@ export class KeywordsComponent implements OnInit {
     this.initForm()
   }
 
+  // Initialisation du formulaire de recherche
   initForm(){
     this.searchFormKeyword = this.formBuilder.group({
       searchKeywords: ['', Validators.required]
@@ -35,6 +36,7 @@ export class KeywordsComponent implements OnInit {
     })
   }
 
+  // Validation pour la recherche par mot clé
   onSearchKeyword(){
     this.keywords = this.searchFormKeyword.get('searchKeywords').value
     if (this.keywords){
@@ -51,6 +53,7 @@ export class KeywordsComponent implements OnInit {
     }
   }
 
+  // Validation pour la recherche par Pseudo
   onSearchUser(){
     this.user = this.searchFormUser.get('searchUser').value
     if (this.user){
@@ -67,10 +70,12 @@ export class KeywordsComponent implements OnInit {
     }
   }
 
+  // réinnitialisation de la liste des resultats
   onCloseSearch(){
     this.posts = null
   }
 
+  // Function pour un scroll "smooth" vers le post selectionner
   scrollOnPost(postId: string){
     document.querySelector("#post_" + postId).scrollIntoView({behavior: "smooth"});
   }

@@ -31,17 +31,18 @@ export class NewPostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(
+    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(    // Récuperation des information du l'utilisateur
       (response: User) => {
         this.authServ.setCurrentUser(response);
-        if (response !== undefined) {
-          this.user = response
-          this.initPostForm(response)
+        if (response !== undefined) {                                     // si utilisateur OK
+          this.user = response                                            // Information de l'utilisateur mise adans une variable
+          this.initPostForm(response)                                     // Init de la function du formaulaire
         };
       }
     );
   }
 
+  // Initialisation du formaulaire du creation du post
   initPostForm(user:User){
     this.postForm = this.formBuilder.group({
       idUser: [this.user.id],
@@ -53,8 +54,9 @@ export class NewPostComponent implements OnInit {
     });
   }
 
+  // Validation du post
   onValidatePost(){
-    if (confirm('Etes vous sur de vouloir poster votre message')){
+    if (confirm('Etes vous sur de vouloir poster votre message')){        // validation du post avec une alerte pour confirmé le post
       const newPost = new Post();
       newPost.title = this.postForm.get('title').value;
       newPost.userPseudoPost = this.user.pseudo;
@@ -64,7 +66,7 @@ export class NewPostComponent implements OnInit {
       newPost.imagePostUrl = this.postForm.get('imagePostUrl').value;
       newPost.postDate = Date.now()
 
-      this.postServ.newPost(this.authServ.getUserId(), newPost, newPost.imagePostUrl)
+      this.postServ.newPost(this.authServ.getUserId(), newPost, newPost.imagePostUrl)     // Envoie des informations du nouveau post vers le service
       .then(
         (response: { message: string }) => {
           this.postServ.getAllPost()
@@ -75,12 +77,13 @@ export class NewPostComponent implements OnInit {
           console.error(error);
         }
       );
-      this.router.navigate(['/timeline'])
-      this.postServ.getAllPost()
+      this.router.navigate(['/timeline'])                                 // renvoie si OK vers la timeline
+      this.postServ.getAllPost()                                          // refresh des posts
     }
   }
 
 
+  // fonction pour la recuperation du fichier
   onFileUpload(event: Event){
     const file = (event.target as HTMLInputElement).files[0];
     this.postForm.get('imagePostUrl').setValue(file);
@@ -92,6 +95,7 @@ export class NewPostComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  // function pour annulation du post et retour vers timeline
   onCancelPost(){
     alert('Etes vous sur d\'annuler votre message')
     this.router.navigate(['/timeline'])

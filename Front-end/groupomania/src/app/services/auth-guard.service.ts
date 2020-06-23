@@ -14,12 +14,12 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const token = localStorage.getItem('token')
-    if(token) {
-      this.myHeaders.set('Authorization', 'Bearer ' + token)
+    const token = localStorage.getItem('token')                                                 // Récupération du token dans la localStorage
+    if(token) {                                                                                 // Si token OK
+      this.myHeaders.set('Authorization', 'Bearer ' + token)                                    // Set du token dans le header
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']);                                                         // Si pas de token retour vers le login
       return false
     }
   }

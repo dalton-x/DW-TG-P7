@@ -25,17 +25,18 @@ export class ProfilComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
-    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(
+    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(      // récupération des information de l'utilisateur
       (response: User) => {
         this.authServ.setCurrentUser(response);
-        if (response !== undefined) {
-          this.user = response
-          this.initForm(response)
+        if (response !== undefined) {                                       // Si utilisateur OK
+          this.user = response                                              // mise en variable des infos de l'utilisateur
+          this.initForm(response)                                           // Init du Fomulaire
         };
       }
     );
   }
 
+  // function pour initialisation du formulaire pour la mise a jour du profil
   initForm(user:User){
     this.profilForm = this.formBuilder.group({
       id: [this.user.id],
@@ -47,6 +48,8 @@ export class ProfilComponent implements OnInit {
     this.imagePreview = this.user.imageUrl;
   }
 
+
+  // Function de recupération des informations du formulaire
   onUpdate(){
     const newUser = new User();
     newUser.firstname = this.profilForm.get('firstname').value;
@@ -54,11 +57,11 @@ export class ProfilComponent implements OnInit {
     newUser.pseudo = this.profilForm.get('pseudo').value;
     newUser.imageUrl = this.profilForm.get('imageUrl').value;
 
-    this.authServ.update(this.authServ.getUserId(), newUser, newUser.imageUrl)
+    this.authServ.update(this.authServ.getUserId(), newUser, newUser.imageUrl)            // Envoie des information vers le service
     .then(
       (response: { message: string }) => {
         console.log(response.message);
-        this.router.navigate(['/updateUser']);
+        this.router.navigate(['/updateUser']);                                            // Renvoie vers la page de confirmation de l'update
       }
     ).catch(
       (error) => {
@@ -67,6 +70,7 @@ export class ProfilComponent implements OnInit {
     );
   }
 
+  // fonction pour la recuperation du fichier
   onFileAdded(event: Event){
     const file = (event.target as HTMLInputElement).files[0];
     this.profilForm.get('imageUrl').setValue(file);
@@ -78,8 +82,9 @@ export class ProfilComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  // Suppression du profil
   onDelete(){
-    if (confirm("Etes vous sur de vouloir supprimé votre profil \n\n\n cette action est IRREVERSIBLE")){
+    if (confirm("Etes vous sur de vouloir supprimé votre profil \n\n\n cette action est IRREVERSIBLE")){  // Confirmation pour la suppression du compte
       this.router.navigate(['/deleteUser']);
     }else{
       this.router.navigate(['/profil']);

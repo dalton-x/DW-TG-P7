@@ -28,13 +28,14 @@ export class PostComponent implements OnInit {
               public funcGlob: FunctionsGlobalService) { }
 
   ngOnInit() {
-    this.display = false
+    this.display = false                      // Initialisation de la classe CSS
   }
 
   // onLike(postId: string){
   //   console.log("J'aime le post : "+postId)
   // }
 
+  // Affichage des commentaires avec la gestion de la classe CSS
   onOpenComms(){
     if (this.display != true){
       this.display = true
@@ -44,8 +45,9 @@ export class PostComponent implements OnInit {
     }
   }
 
+  // fontion pour la suppression d'un post
   onTrashPost(postId){
-    this.postServ.deletePost(postId).then(
+    this.postServ.deletePost(postId).then(    // envoie vers le service
       (response: { message: string }) => {
         console.log(response.message);
         // refresh de la liste des posts

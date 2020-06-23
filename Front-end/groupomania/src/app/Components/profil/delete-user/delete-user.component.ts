@@ -25,16 +25,16 @@ export class DeleteUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const start = 3
     const counter = Observable.interval(1000);
-    this.authServ.delete(this.authServ.getUserId())
+    this.authServ.delete(this.authServ.getUserId())                         // Envoie de la demande de delete du profil au service
     this.counterSubscription = counter.subscribe(
       (value) => {
         this.secondes = start - value;
-        if (this.secondes < 0){
-          this.authServ.logout();
-          localStorage.clear()
-          localStorage.setItem('auth',JSON.stringify(false))
-          this.appComp.isOnline = false
-          this.router.navigate(['/index']);
+        if (this.secondes < 0){                                             // Mise en place de compte a rebours
+          this.authServ.logout();                                           // Déconnection de l'utilisateur
+          localStorage.clear()                                              // Nettoyage du localStorage
+          localStorage.setItem('auth',JSON.stringify(false))                // Set du localStorage en false
+          this.appComp.isOnline = false                                     // Reset de la variable isOnline
+          this.router.navigate(['/index']);                                 // Renvoie vers l'index
         }
       },
       (error) => {
@@ -46,6 +46,7 @@ export class DeleteUserComponent implements OnInit, OnDestroy {
     );
   }
 
+  // Nettoyage des subscriptions
   ngOnDestroy() {
     this.counterSubscription.unsubscribe();
   }

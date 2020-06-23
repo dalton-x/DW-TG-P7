@@ -29,13 +29,14 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  // Validation du formulaire
   onSignup() {
     const lastname = this.signupForm.get('lastname').value;
     const firstname = this.signupForm.get('firstname').value;
     const pseudo = this.signupForm.get('pseudo').value;
     const email = this.signupForm.get('email').value;
     const password = this.signupForm.get('password').value;
-    this.authServ.create(lastname, firstname, pseudo, email, password).then(
+    this.authServ.create(lastname, firstname, pseudo, email, password).then(          // Envoie des informations du formulaire vers le service
       (response: { message: string }) => {
         localStorage.setItem('auth',JSON.stringify(true))
         this.router.navigate(['/login']);

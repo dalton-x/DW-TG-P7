@@ -23,16 +23,15 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.appComp.isAdmin = this.authServ.getUserIsAdmin();
-    this.appComp.isOnline = false;
-    localStorage.setItem('auth',JSON.stringify(false));
+    localStorage.setItem('auth',JSON.stringify(false));                         // Set du localStorage pour initiliation
     localStorage.setItem('admin','false');
-    this.loginForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({                                   // Initialisation du formulaire
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     });
   }
 
+  // Validation du formulaire
   onLogin() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;

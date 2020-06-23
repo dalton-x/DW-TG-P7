@@ -9,10 +9,12 @@ export class FunctionsGlobalService {
 
   constructor() { }
 
+  // Récuperer les information de login du localStorage
   getLogin(){
     localStorage.getItem('log')
   }
 
+  // Verifie si l'utilisateur est en ligne
   getOnline(){
     if (this.getLogin() !== null){
       this.userOnline = true

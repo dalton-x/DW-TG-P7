@@ -12,7 +12,7 @@ export class CommentService {
   constructor(private http: HttpClient
               ) { }
 
-
+  // Permet de communiqué avec le serveur pour la création d'un nouveau commentaire
   newComment(postId: string, commentData : Object) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/comment/create/'+postId, commentData).subscribe(
@@ -26,7 +26,7 @@ export class CommentService {
     });
   }
 
-
+  // Permet de communiqué avec le serveur pour la récupération des commentaire d'un post
   getAllComments(postId: string){
     this.http.get('http://localhost:3000/api/comment/'+postId).subscribe(
       (comment: Comment[]) => {
@@ -39,6 +39,7 @@ export class CommentService {
     );
   }
 
+  // Permet de communiqué avec le serveur pour la suppression d'un commentaire
   deleteComment(commentId : string){
     return new Promise((resolve, reject) => {
       this.http.delete('http://localhost:3000/api/comment/'+ commentId).subscribe(

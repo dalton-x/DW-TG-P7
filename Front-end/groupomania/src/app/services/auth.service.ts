@@ -19,13 +19,12 @@ export class AuthService {
   public imageUrl: string;
   public user: User;
   private authToken: string;
-
-
   public isAdmin: boolean;
 
   constructor(private http: HttpClient,
               private router: Router) {}
 
+  // permet d'avoir le UserId
   getUserId() {
     if (this.userId){
       return this.userId;
@@ -33,12 +32,18 @@ export class AuthService {
       return localStorage.getItem('userId')
     }
   }
+
+  // Permet d'avoir le prénom de l'utilisateur
   getUserFistname() {
     return this.firstname;
   }
+
+  // Permet d'avoir le nom de l'utilisateur
   getUserLastname() {
     return this.lastname;
   }
+
+  // Permet d'avoir le pseudo de l'utilisateur
   getUserPseudo() {
     if (this.pseudo){
       return this.pseudo;
@@ -46,9 +51,13 @@ export class AuthService {
       return localStorage.getItem('pseudo')
     }
   }
+
+  // Permet d'avoir l'avatar de l'utilisateur
   getUserImageUrl() {
     return this.imageUrl;
   }
+
+  // Permet d'avoir le token d'authentification
   getToken() {
     if (this.authToken){
       return this.authToken;
@@ -56,6 +65,8 @@ export class AuthService {
       return localStorage.getItem('token')
     }
   }
+
+  // Permet de savoir si l'utilisateur est administrateur
   getUserIsAdmin() {
     // if (this.isAdmin){
       return this.isAdmin;
@@ -64,14 +75,17 @@ export class AuthService {
     // }
   }
 
+  // Permet de mettre les infos de l'utilisateur en variable
   setCurrentUser(user: User) {
     this.user = user;
   }
 
+  // Permet de recupérer les informations de l'utilisateur en fonction de son Id
   getCurrentUser(id: string): Observable<User> {
     return this.http.get<User>('http://localhost:3000/api/user/'+id);
   }
 
+  // Permet de communiqué avec le serveur pour la création d'un utilisteur
   create(lastname: string , firstname: string , pseudo: string ,email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/user/signup', {
@@ -93,6 +107,7 @@ export class AuthService {
     });
   }
 
+  // Permet de communiqué avec le serveur pour le login de l'utilisateur
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/user/login', {email: email, password: password}).subscribe(
@@ -129,6 +144,7 @@ export class AuthService {
     });
   }
 
+  // Permet de communiqué avec le serveur pour déconnecter l'utilisateur
   logout() {
     localStorage.clear();
     this.authToken = null;
@@ -137,6 +153,7 @@ export class AuthService {
     this.router.navigate(['/index']);
   }
 
+  // Permet de communiqué avec le serveur pour mettre a jour les information du profile utilisateur
   update(id: string ,userData : Object, image: string | File) {
     return new Promise((resolve, reject) => {
       if (typeof image === 'string') {
@@ -164,6 +181,7 @@ export class AuthService {
     });
   }
 
+  // Permet de communiqué avec le serveur pour supprimé le profil de l'utilisateur
   delete(id: string){
     return new Promise((resolve, reject) => {
       this.http.delete<User>('http://localhost:3000/api/user/'+ id )

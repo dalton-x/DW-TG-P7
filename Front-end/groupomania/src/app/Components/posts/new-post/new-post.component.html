@@ -10,6 +10,7 @@
               <label for="title" class="badge badge-default mt-3">Titre du post</label>
               <input type="text" class="form-control" id="title" formControlName="title">
               <br>
+              <!-- Upload du media -->
               <p class="text-center" *ngIf="!imageUpload">Votre illustration</p>
               <img alt="Image du post" [src]="imageUpload" *ngIf="imageUpload" class="rounded img-fluid mx-auto d-block form-control">
               <input type="file" accept="image/*" #imagePostInput (change)="onFileUpload($event)">
@@ -22,6 +23,7 @@
                   <label for="keywords" class="badge badge-default mt-3">Mots-clés</label>
                   <input type="text" class="form-control" id="keywords" formControlName="keywords" title="Uniquement Majuscule/Minuscule et chiffres autorisés" pattern="^[a-zA-Z0-9]*$">
                 </div>
+                <!-- Liste deroulante pour l'humeur -->
                 <div class="col">
                   <label for="mood" class="badge badge-default mt-3">Votre humeur</label>
                   <select id="mood" class="form-control" name="mood" size="1"  formControlName="mood">
