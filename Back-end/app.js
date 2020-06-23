@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');const cors = require('cors');
+const path = require('path');
+const cors = require('cors');
 const db = require("./models/index");
 
 var corsOptions = {
@@ -10,10 +11,10 @@ var corsOptions = {
 const app = express();
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  next();
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); //Controle des adresses qui peuvent se connecter a l'API // * == All
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'); // reponse de la la pre-verification de la requete option
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'); // Ajout des requete authorisé par le serveur pour le front-end
+  next(); // passage au middelweare suivant
 });
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -30,7 +31,9 @@ require("./routes/comment.routes")(app);
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Bienvenue sur l'application communautaire de Groupomania" });
+  res.json({
+    message: "Bienvenue sur l'application communautaire de Groupomania"
+  });
 });
 
 app.use(cors(corsOptions));

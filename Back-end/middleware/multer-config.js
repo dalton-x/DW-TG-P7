@@ -1,5 +1,6 @@
 const multer = require('multer');
 
+// Création d'un objet pour récupartion de l'extension du fichier
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
@@ -22,4 +23,6 @@ const storage = multer.diskStorage({
   }
 });
 
-module.exports = multer({storage: storage}).single('image');
+module.exports = multer({
+  storage: storage
+}).single('image');

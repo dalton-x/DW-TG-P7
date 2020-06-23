@@ -22,6 +22,7 @@ db.user = require("./user.js")(sequelize, Sequelize);
 db.post = require("./post.js")(sequelize, Sequelize);
 db.comment = require("./comment.js")(sequelize, Sequelize);
 
+// Déclaration du lien des table entre-elles avec leurs clées "étrangère"
 db.post.hasMany(db.comment, {foreignKey: 'postId', sourceKey: 'id'});
 db.comment.belongsTo(db.post, {foreignKey: 'postId', targetKey: 'id'});
 

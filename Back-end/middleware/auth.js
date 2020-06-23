@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     const decodedToken = jwt.verify(token, '$2b$10$hLNQnC3nMg7RQgnrDcdj9Oltl.UBmGruFCuNz2G.y33AjMgLJEJbq'); // Clé de crytage du tokken pour décodage
     const id = decodedToken.userId; //mise en memoire du token decryté
     if (req.params.id && parseInt(req.params.id) !== id) { // vérification du tokken 
-      throw 'Invalid user ID';  // mauvais token
+      throw 'Invalid user ID'; // mauvais token
     } else {
       next(); // bon token on passe a la suite
     }
