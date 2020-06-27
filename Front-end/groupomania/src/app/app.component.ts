@@ -26,7 +26,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    // Récupération des information dans le localStorage
+    // Récupération des informations dans le localStorage
     this.isAuth = JSON.parse(localStorage.getItem('auth'));
     this.isAdmin = JSON.parse(localStorage.getItem('admin'))
 
