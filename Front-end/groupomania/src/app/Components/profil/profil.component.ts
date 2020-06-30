@@ -25,7 +25,7 @@ export class ProfilComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
-    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(      // récupération des information de l'utilisateur
+    this.authServ.getCurrentUser(this.authServ.getUserId()).subscribe(      // récupération des informations de l'utilisateur
       (response: User) => {
         this.authServ.setCurrentUser(response);
         if (response !== undefined) {                                       // Si utilisateur OK
